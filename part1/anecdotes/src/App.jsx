@@ -4,6 +4,47 @@ function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
 
+function getIndexOfAnecdoteWithMostVotes(votes) {
+  return Object.keys(votes).reduce((maxIndex, currentIndex) => {
+    return votes[currentIndex] > votes[maxIndex] ? currentIndex : maxIndex;
+  }, 0);
+}
+
+const AnecdoteTitle = ({ text }) => {
+  return (
+    <h1>{text}</h1>
+  )
+}
+
+const AnecdoteAndVotes = ({ anecdote, votes }) => {
+  return (
+    <>
+      <div>{anecdote}</div>
+      <div>has {votes || 0} votes</div>
+    </>
+  )
+}
+
+const AnecdoteOfTheDay = ({ anecdote, votes, handleVote, handleNextAnecdote }) => {
+  return (
+    <>
+      <AnecdoteTitle text="Anecdote of the day" />
+      <AnecdoteAndVotes anecdote={anecdote} votes={votes} />
+      <button onClick={handleVote}>vote</button>
+      <button onClick={handleNextAnecdote}>next anecdote</button>
+    </>
+  )
+}
+
+const AnecdoteWithMostVotes = ({ anecdote, votes }) => {
+  return (
+    <>
+      <AnecdoteTitle text="Anecdote with most votes" />
+      <AnecdoteAndVotes anecdote={anecdote} votes={votes} />
+    </>
+  )
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -21,7 +62,6 @@ const App = () => {
 
   const handleNextAnecdote = () => {
     const randomIndex = Math.trunc(getRandomArbitrary(0, anecdotes.length));
-    console.log('test randomIndex', randomIndex)
     setSelected(randomIndex);
   }
 
@@ -33,16 +73,22 @@ const App = () => {
     setVotes(newVotes);
   }
 
+  const indexOfAnecdoteWithMostVotes = getIndexOfAnecdoteWithMostVotes(votes);
+  const anecdoteWithMostVotes = anecdotes[indexOfAnecdoteWithMostVotes];
+  const votesForAnecdoteWithMostVotes = votes[indexOfAnecdoteWithMostVotes] || 0;
+
   return (
     <>
-      <div>
-      {anecdotes[selected]}
-      </div>
-      <div>
-        has {votes[selected] || 0} votes
-      </div>
-      <button onClick={handleVote}>vote</button>
-      <button onClick={handleNextAnecdote}>next anecdote</button>
+      <AnecdoteOfTheDay
+        anecdote={anecdotes[selected]}
+        votes={votes[selected]}
+        handleVote={handleVote}
+        handleNextAnecdote={handleNextAnecdote}
+      />
+      <AnecdoteWithMostVotes
+        anecdote={anecdoteWithMostVotes}
+        votes={votesForAnecdoteWithMostVotes}
+      />
     </>
   )
 }
