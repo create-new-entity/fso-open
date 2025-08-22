@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import axios from 'axios'
+import { useEffect } from 'react'
 
 let idTracker = 0
 
@@ -55,16 +57,26 @@ const PersonForm = (props) => {
 }
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: '040-123456', id: idTracker++ },
-    { name: 'Ada Lovelace', number: '39-44-5323523', id: idTracker++ },
-    { name: 'Dan Abramov', number: '12-43-234345', id: idTracker++ },
-    { name: 'Mary Poppendieck', number: '39-23-6423122', id: idTracker++ }
-  ]) 
+  const [persons, setPersons] = useState([]) 
 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/persons')
+        setPersons(response.data)
+      }
+      catch(e) {
+        console.log('Something is rotten in the state of Denmark.', e)
+      }
+    }
+    fetchData()
+  }, [])
+
+
 
   const handleAdd = (event) => {
     event.preventDefault()
