@@ -3,6 +3,19 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import personService from './services/persons'
 
+const NOTIFICATION_TIMEOUT = 5000
+const SUCCESS_NOTIFICATION_TYPE = 'success'
+const FAILURE_NOTIFICATION_TYPE = 'failure'
+
+const Notification = (props) => {
+  const { message, type } = props
+  return (
+    <div className={type}>
+      {message}
+    </div>
+  )
+}
+
 const Filter = ({ handleFilterChange, filter }) => {
   return (
     <div>
@@ -84,6 +97,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [notification, setNotification] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -98,7 +112,10 @@ const App = () => {
     fetchData()
   }, [])
 
-
+  const handleNotification = (message, type) => {
+    setNotification({ message, type })
+    setTimeout(() => setNotification(null), NOTIFICATION_TIMEOUT)
+  }
 
   const handleAdd = (event) => {
     event.preventDefault()
@@ -122,9 +139,11 @@ const App = () => {
             setPersons(persons.map((person) => person.id !== existingPerson.id ? person : response))
             setNewName('')
             setNewNumber('')
+            handleNotification(`Updated ${response.name}`, SUCCESS_NOTIFICATION_TYPE)
           })
           .catch((error) => {
             console.error('Error updating person:', error)
+            handleNotification('Failed to update person', FAILURE_NOTIFICATION_TYPE)
           })
       }
       return
@@ -140,9 +159,10 @@ const App = () => {
         setPersons(persons.concat(response))
         setNewName('')
         setNewNumber('')
+        handleNotification(`Added ${response.name}`, SUCCESS_NOTIFICATION_TYPE)
       })
       .catch((error) => {
-          console.log('Failed to create new person:', error)
+          handleNotification('Failed to create new person', FAILURE_NOTIFICATION_TYPE)
       })
   }
 
@@ -161,6 +181,10 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      {
+        notification &&
+        <Notification message={notification.message} type={notification.type}/>
+      }
       <Filter handleFilterChange={handleFilterChange} filter={filter}/>
       
       <h3>Add a new</h3>
