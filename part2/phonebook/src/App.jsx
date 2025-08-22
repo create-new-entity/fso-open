@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
-
-let idTracker = 0
+import personService from './services/persons'
 
 const Filter = ({ handleFilterChange, filter }) => {
   return (
@@ -13,7 +12,27 @@ const Filter = ({ handleFilterChange, filter }) => {
 }
 
 const Persons = (props) => {
-  const { persons, filter } = props
+  const { persons, filter, setPersons } = props
+
+  const handleDelete = (id) => {
+    const foundPerson = persons.find((person) => person.id === id)
+    if(!foundPerson) {
+      return () => {}
+    }
+    return () => {
+      const deleteMsg = `Delete ${foundPerson.name}?`
+      if(window.confirm(deleteMsg)) {
+        personService.deletePerson(id)
+            .then(() => {
+              const filteredPersons = persons.filter((person) => person.id !== id)
+              setPersons(filteredPersons)
+            })
+            .catch((error) => {
+              console.error('Error deleting person:', error)
+            })
+      }
+    }
+  }
   return (
     <>
       {
@@ -23,7 +42,10 @@ const Persons = (props) => {
           })
           .map((person) => {
             return (
-              <p key={person.id}>{person.name} {person.number}</p>
+              <div key={`${person.id} ${person.name}`}>
+                <p>{person.name} {person.number}</p>
+                <button onClick={handleDelete(person.id)}>delete</button>
+              </div>
             )
           })
       }
@@ -85,23 +107,43 @@ const App = () => {
       return
     }
 
-    const hasDuplicate = persons.some((person) => {
+    const existingPerson = persons.find((person) => {
       return person.name.toLowerCase() === newName.toLowerCase()
     })
 
-    if(hasDuplicate) {
-      window.alert(`${newName} is already added to phonebook`)
+    if(existingPerson) {
+      if(window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+        const updatedPerson = {
+          ...existingPerson,
+          number: newNumber
+        }
+        personService.update(existingPerson.id, updatedPerson)
+          .then((response) => {
+            setPersons(persons.map((person) => person.id !== existingPerson.id ? person : response))
+            setNewName('')
+            setNewNumber('')
+          })
+          .catch((error) => {
+            console.error('Error updating person:', error)
+          })
+      }
       return
     }
 
     const nameObject = {
       name: newName,
-      number: newNumber,
-      id: idTracker++
+      number: newNumber
     }
-    setPersons(persons.concat(nameObject))
-    setNewName('')
-    setNewNumber('')
+
+    personService.create(nameObject)
+      .then((response) => {
+        setPersons(persons.concat(response))
+        setNewName('')
+        setNewNumber('')
+      })
+      .catch((error) => {
+          console.log('Failed to create new person:', error)
+      })
   }
 
   const handleNameChange = (event) => {
@@ -131,7 +173,7 @@ const App = () => {
       />
       
       <h3>Numbers</h3>
-      <Persons persons={persons} filter={filter}/>
+      <Persons persons={persons} filter={filter} setPersons={setPersons}/>
     </div>
   )
 }
