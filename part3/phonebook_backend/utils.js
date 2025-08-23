@@ -8,6 +8,11 @@ function getRandomInteger() {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function getRequestBodyMorgan(req, res) {
+    return JSON.stringify(req.body)
+}
+
 module.exports = {
-    getRandomInteger
+    getRandomInteger,
+    getRequestBodyMorgan
 }

@@ -2,11 +2,13 @@ let { persons } = require('./data')
 
 const express = require('express')
 const morgan = require('morgan')
-const { getRandomInteger } = require('./utils')
+const { getRandomInteger, getRequestBodyMorgan } = require('./utils')
 const app = express()
 
 app.use(express.json())
-app.use(morgan('tiny'))
+
+morgan.token('requestBody', getRequestBodyMorgan)
+app.use(morgan(':method :url :status :response-time :requestBody'))
 
 const PORT = 3001
 
@@ -69,9 +71,9 @@ app.post('/api/persons', (req, res) => {
         return
     }
 
-    person.id = getRandomInteger()
-    persons = persons.concat(person)
-    res.status(201).json(person)
+    newPerson.id = getRandomInteger()
+    persons = persons.concat(newPerson)
+    res.status(201).json(newPerson)
 })
 
 app.delete('/api/persons/:id', (req, res) => {
