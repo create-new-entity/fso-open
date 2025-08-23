@@ -41,7 +41,32 @@ app.get('/info', (req, res) => {
 })
 
 app.post('/api/persons', (req, res) => {
-    const person = req.body
+    const newPerson = req.body
+
+    if(!newPerson.name) {
+        res.status(400).json({
+            error: "Name is required."
+        })
+        return
+    }
+    if(!newPerson.number) {
+        res.status(400).json({
+            error: "Number is required."
+        })
+        return
+    }
+
+    const hasDuplicate = persons.find((person) => {
+        return person.name.toLowerCase() === newPerson.name.toLowerCase()
+    })
+
+    if(hasDuplicate) {
+        res.status(400).json({
+            error: "Name must be unique"
+        })
+        return
+    }
+
     person.id = getRandomInteger()
     persons = persons.concat(person)
     res.status(201).json(person)
