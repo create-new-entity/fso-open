@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import countiresService from './services/countires'
+import countiresService, { baseURLWeatherIcon } from './services/countires'
 
 const Search = (props) => {
   const {
@@ -31,6 +31,39 @@ const getInitialStateOfShowCountry = (filteredCountries) => {
     initialState[country.name.common] = false
   })
   return initialState
+}
+
+
+const Weather = (props) => {
+  const { capital, capitalInfo } = props
+  const [weather, setWeather] = useState(null)
+
+  const { latlng } = capitalInfo
+
+  useEffect(() => {
+    countiresService.getWeather(latlng[0], latlng[1])
+        .then((weather) => {
+          setWeather(weather)
+        })
+        .catch((error) => {
+          console.log('Failed to fetch weather', error)
+        })
+  }, [latlng])
+  
+  return (
+    <div>
+      <h2>Weather in {capital[0]}</h2>
+      {
+        weather &&
+        <>
+          <p>Temperature {weather.current.temp} Celsius</p>
+          <img src={`${baseURLWeatherIcon}/${weather.current.weather[0].icon}@2x.png`} alt="Weather icon" />
+          <p>Wind {weather.current.wind_speed} m/s</p>
+        </>
+      }
+      
+    </div>
+  )
 }
 
 const CountryList = (props) => {
@@ -85,6 +118,7 @@ const Country = (props) => {
         }
       </ul>
       <img src={country.flags.png} alt={`Flag of ${country.name.common}`} />
+      <Weather capital={country.capital} capitalInfo={country.capitalInfo} />
     </div>
   )
 }
