@@ -25,14 +25,45 @@ const Search = (props) => {
   )
 }
 
+const getInitialStateOfShowCountry = (filteredCountries) => {
+  const initialState = {}
+  filteredCountries.forEach((country) => {
+    initialState[country.name.common] = false
+  })
+  return initialState
+}
+
 const CountryList = (props) => {
   const { filteredCountries } = props
+  const [showCountry, setShowCountry] = useState(getInitialStateOfShowCountry(filteredCountries))
+
+  const getHandleShowCountry = (countryCommonName) => {
+    return () => {
+      setShowCountry((prevState) => {
+        const newState = { ...prevState }
+        newState[countryCommonName] = !newState[countryCommonName]
+        return newState
+      })
+    }
+  }
 
   return (
     <div>
-      {filteredCountries.map((country) => (
-        <div key={country.name.common}>{country.name.common}</div>
-      ))}
+      {filteredCountries.map((country) => {
+        return (
+          <div key={country.name.common}>
+            {country.name.common}
+            <button style={{ marginLeft: '5px' }} onClick={getHandleShowCountry(country.name.common)}>
+              {
+                showCountry[country.name.common] ? 'Hide' : 'Show'
+              }
+            </button>
+            {
+              showCountry[country.name.common] && <Country country={country} />
+            }
+          </div>
+        )
+      })}
     </div>
   )
 }
@@ -82,7 +113,7 @@ const App = () => {
         setFilteredCountries={setFilteredCountries}
       />
       {
-        filteredCountries.length > 10 &&
+        searchInput &&filteredCountries.length > 10 &&
         <p>Too many matches, specify another filter</p>
       }
       {
