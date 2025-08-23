@@ -10,7 +10,7 @@ const FAILURE_NOTIFICATION_TYPE = 'failure'
 const Notification = (props) => {
   const { message, type } = props
   return (
-    <div className={type}>
+    <div className={[type, 'notification'].join(' ')}>
       {message}
     </div>
   )
@@ -143,7 +143,7 @@ const App = () => {
           })
           .catch((error) => {
             console.error('Error updating person:', error)
-            handleNotification('Failed to update person', FAILURE_NOTIFICATION_TYPE)
+            handleNotification(`Information of ${existingPerson.name} has already been removed from server`, FAILURE_NOTIFICATION_TYPE)
           })
       }
       return

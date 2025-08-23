@@ -1,4 +1,6 @@
-
+.notification {
+    margin-bottom: 5px;
+}
 
 .success {
     color: green;
