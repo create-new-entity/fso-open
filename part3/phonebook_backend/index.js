@@ -1,4 +1,4 @@
-const { persons} = require('./data')
+let { persons } = require('./data')
 
 const express = require('express')
 const app = express()
@@ -35,6 +35,12 @@ app.get('/info', (req, res) => {
     `
     res.writeHead(200, { 'Content-Type': 'text/html' })
     res.end(response)
+})
+
+app.delete('/api/persons/:id', (req, res) => {
+    const deleteId = req.params.id
+    persons = persons.filter(person => person.id !== deleteId)
+    res.status(204).end()
 })
 
 app.listen(PORT)
