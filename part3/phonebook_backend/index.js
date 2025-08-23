@@ -1,7 +1,10 @@
 let { persons } = require('./data')
 
 const express = require('express')
+const { getRandomInteger } = require('./utils')
 const app = express()
+
+app.use(express.json())
 
 const PORT = 3001
 
@@ -35,6 +38,13 @@ app.get('/info', (req, res) => {
     `
     res.writeHead(200, { 'Content-Type': 'text/html' })
     res.end(response)
+})
+
+app.post('/api/persons', (req, res) => {
+    const person = req.body
+    person.id = getRandomInteger()
+    persons = persons.concat(person)
+    res.status(201).json(person)
 })
 
 app.delete('/api/persons/:id', (req, res) => {
