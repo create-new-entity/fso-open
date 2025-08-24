@@ -102,7 +102,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3002/api/persons')
+        const response = await axios.get('/api/persons')
         setPersons(response.data)
       }
       catch(e) {
@@ -162,7 +162,7 @@ const App = () => {
         handleNotification(`Added ${response.name}`, SUCCESS_NOTIFICATION_TYPE)
       })
       .catch((error) => {
-          handleNotification('Failed to create new person', FAILURE_NOTIFICATION_TYPE)
+          handleNotification(error.response.data.error.message, FAILURE_NOTIFICATION_TYPE)
       })
   }
 
