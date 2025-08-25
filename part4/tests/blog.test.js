@@ -1,7 +1,13 @@
-const { test, describe } = require('node:test')
+const { test, describe, beforeEach } = require('node:test')
 const assert = require('node:assert')
 const listHelper = require('../utils/list_helper')
 const testDataBlogs = require('./testData')
+const initialData = require('./initialData')
+const app = require('../app')
+const supertest = require('supertest')
+const Blog = require('../models/Blog')
+const api = supertest(app)
+
 
 describe('dummy test', () => {
     test('dummy returns one', () => {
@@ -29,5 +35,22 @@ describe('Favorite blog suite', () => {
 
     test('mostBlogs function works', () => {
         assert.deepStrictEqual(listHelper.mostBlogs(testDataBlogs), { author: 'Edgar Norton', blogs: 3 })
+    })
+})
+
+describe('API test suite', () => {
+    beforeEach(async () => {
+        await Blog.deleteMany({})
+        const savePromises = initialData.map((initialD) => {
+            return new Blog(initialD).save()
+        })
+        await Promise.all(savePromises)
+    })
+
+    test('GET request returns correct amount of blog items.', async () => {
+        const response = await api.get('/api/blogs')
+            .expect(200)
+            .expect('Content-Type', /application\/json/)
+        assert.strictEqual(response.body.length, initialData.length)
     })
 })
