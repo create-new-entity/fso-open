@@ -12,9 +12,13 @@ describe('dummy test', () => {
     })
 })
 
-describe('Total likes suite', () => {
+describe('Likes suite', () => {
     test('totalLikes function works', () => {
-        assert.strictEqual(listHelper.totalLikes(testDataBlogs), 48)
+        assert.strictEqual(listHelper.totalLikes(testDataBlogs), 77)
+    })
+
+    test('mostLikes function works', () => {
+        assert.deepStrictEqual(listHelper.mostLikes(testDataBlogs), { author: 'Edgar Norton', likes: 29 })
     })
 })
 

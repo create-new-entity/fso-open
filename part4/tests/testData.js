@@ -60,7 +60,7 @@ const testDataBlogs = [
         title: 'Random 1',
         author: 'Edgar Norton',
         url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
-        likes: 0,
+        likes: 9,
         __v: 0
     },
     {
@@ -68,7 +68,7 @@ const testDataBlogs = [
         title: 'Random 2',
         author: 'Edgar Norton',
         url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
-        likes: 0,
+        likes: 9,
         __v: 0
     },
     {
@@ -76,7 +76,7 @@ const testDataBlogs = [
         title: 'Random 3',
         author: 'Edgar Norton',
         url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
-        likes: 0,
+        likes: 11,
         __v: 0
     }
 ]
