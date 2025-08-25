@@ -54,6 +54,30 @@ const testDataBlogs = [
         url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
         likes: 12,
         __v: 0
+    },
+    {
+        _id: '5a422b3a1b54a676234d17f0',
+        title: 'Random 1',
+        author: 'Edgar Norton',
+        url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
+        likes: 0,
+        __v: 0
+    },
+    {
+        _id: '5a422b3a1b54a676234d17f1',
+        title: 'Random 2',
+        author: 'Edgar Norton',
+        url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
+        likes: 0,
+        __v: 0
+    },
+    {
+        _id: '5a422b3a1b54a676234d17f2',
+        title: 'Random 3',
+        author: 'Edgar Norton',
+        url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
+        likes: 0,
+        __v: 0
     }
 ]
 

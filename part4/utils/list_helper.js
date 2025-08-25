@@ -17,8 +17,35 @@ const favoriteBlog = (blogs) => {
     })
 }
 
+const mostBlogs = (blogs) => {
+    const counterMap = {}
+    blogs.forEach((blog) => {
+        counterMap[blog.author] = (counterMap[blog.author] || 0) + 1
+    })
+    const blogCounts = Object.keys(counterMap).map((author) => {
+        return {
+            author,
+            blogs: counterMap[author]
+        }
+    })
+
+    blogCounts.sort((a, b) => {
+        return a.author.toLowerCase().localeCompare(b.author.toLowerCase())
+    })
+
+    const authorWithMostBlogs = blogCounts.reduce((acc, curr) => {
+        if(curr.blogs > acc.blogs) {
+            return curr
+        }
+        return acc
+    })
+    
+    return authorWithMostBlogs
+}
+
 module.exports = {
     dummy,
     totalLikes,
-    favoriteBlog
+    favoriteBlog,
+    mostBlogs
 }

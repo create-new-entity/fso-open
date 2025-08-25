@@ -22,4 +22,8 @@ describe('Favorite blog suite', () => {
     test('favoriteBlog function works', () => {
         assert.deepStrictEqual(listHelper.favoriteBlog(testDataBlogs), testDataBlogs[2])
     })
+
+    test('mostBlogs function works', () => {
+        assert.deepStrictEqual(listHelper.mostBlogs(testDataBlogs), { author: 'Edgar Norton', blogs: 3 })
+    })
 })
