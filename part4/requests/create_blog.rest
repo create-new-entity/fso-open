@@ -1,0 +1,8 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "author": "The Invisible Man",
+    "url": "https://en.wikipedia.org/wiki/The_Invisible_Man",
+    "likes": 10
+}
