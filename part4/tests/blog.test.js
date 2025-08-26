@@ -1,4 +1,4 @@
-const { test, describe, beforeEach } = require('node:test')
+const { test, describe, beforeEach, after } = require('node:test')
 const assert = require('node:assert')
 const listHelper = require('../utils/list_helper')
 const testDataBlogs = require('./testData')
@@ -6,6 +6,8 @@ const initialData = require('./initialData')
 const app = require('../app')
 const supertest = require('supertest')
 const Blog = require('../models/Blog')
+const { areIdsUniq } = require('./testUtils')
+const { default: mongoose } = require('mongoose')
 const api = supertest(app)
 
 
@@ -53,4 +55,20 @@ describe('API test suite', () => {
             .expect('Content-Type', /application\/json/)
         assert.strictEqual(response.body.length, initialData.length)
     })
+
+    test('Unique identifier property is "id", not something else.', async () => {
+        const response = await api.get('/api/blogs')
+            .expect(200)
+            .expect('Content-Type', /application\/json/)
+        const blogs = response.body
+        const keysInBlog = Object.keys(blogs[0]).sort()
+        const expectedKeys = [ 'id', 'title', 'author', 'url', 'likes' ].sort()
+        assert.deepStrictEqual(keysInBlog, expectedKeys)
+        assert.ok(areIdsUniq(blogs))
+    })
+})
+
+after(async () => {
+    await mongoose.connection.close()
+    console.log('DB Connection closed.')
 })
