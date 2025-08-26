@@ -87,6 +87,22 @@ describe('API test suite', () => {
 
         assert.equal(nBlogsBefore + 1, nBlogsAfter)
         assert.deepStrictEqual({ ...initialData.dummyBlog, id: createdBlog.id }, createdBlog)
+    }),
+
+    test('POST request, set likes to 0 if not provided.', async () => {
+        let response
+
+        const payload = { ...initialData.dummyBlog }
+        delete payload.likes
+        
+        response = await api.post('/api/blogs')
+            .send(payload)
+            .expect(201)
+            .expect('Content-Type', /application\/json/)
+
+        const createdBlog = response.body
+
+        assert.equal(createdBlog.likes, 0)
     })
 })
 
