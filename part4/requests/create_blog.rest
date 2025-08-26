@@ -17,3 +17,26 @@ Content-Type: application/json
     "title": "1984 ( No \"like\" property in payload? Why? )",
     "url": "https://en.wikipedia.org/wiki/Nineteen_Eighty-Four"
 }
+
+
+###
+
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "author": "No title property",
+    "url": "https://en.wikipedia.org/wiki/Nineteen_Eighty-Four",
+    "likes": 0
+}
+
+###
+
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "George Orwell",
+    "url": "https://en.wikipedia.org/wiki/Nineteen_Eighty-Four",
+    "likes": 0
+}

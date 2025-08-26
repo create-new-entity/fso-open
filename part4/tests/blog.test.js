@@ -10,6 +10,8 @@ const { areIdsUniq } = require('./testUtils')
 const { default: mongoose } = require('mongoose')
 const api = supertest(app)
 
+const blogsBaseUrl = '/api/blogs'
+
 
 describe('dummy test', () => {
     test('dummy returns one', () => {
@@ -50,14 +52,14 @@ describe('API test suite', () => {
     })
 
     test('GET request returns correct amount of blog items.', async () => {
-        const response = await api.get('/api/blogs')
+        const response = await api.get(blogsBaseUrl)
             .expect(200)
             .expect('Content-Type', /application\/json/)
         assert.strictEqual(response.body.length, initialData.initialBlogs.length)
     })
 
     test('Unique identifier property is "id", not something else.', async () => {
-        const response = await api.get('/api/blogs')
+        const response = await api.get(blogsBaseUrl)
             .expect(200)
             .expect('Content-Type', /application\/json/)
         const blogs = response.body
@@ -69,18 +71,18 @@ describe('API test suite', () => {
 
     test('POST request works.', async () => {
         let response
-        response = await api.get('/api/blogs')
+        response = await api.get(blogsBaseUrl)
             .expect(200)
             .expect('Content-Type', /application\/json/)
         const nBlogsBefore = response.body.length
 
-        response = await api.post('/api/blogs')
+        response = await api.post(blogsBaseUrl)
             .send(initialData.dummyBlog)
             .expect(201)
             .expect('Content-Type', /application\/json/)
         const createdBlog = response.body
 
-        response = await api.get('/api/blogs')
+        response = await api.get(blogsBaseUrl)
             .expect(200)
             .expect('Content-Type', /application\/json/)
         const nBlogsAfter = response.body.length
@@ -95,7 +97,7 @@ describe('API test suite', () => {
         const payload = { ...initialData.dummyBlog }
         delete payload.likes
         
-        response = await api.post('/api/blogs')
+        response = await api.post(blogsBaseUrl)
             .send(payload)
             .expect(201)
             .expect('Content-Type', /application\/json/)
@@ -103,6 +105,22 @@ describe('API test suite', () => {
         const createdBlog = response.body
 
         assert.equal(createdBlog.likes, 0)
+    }),
+
+    test('POST request, title and author are required.', async () => {
+        let response 
+
+        const payloadNoTitle = { ...initialData.dummyBlog }
+        delete payloadNoTitle.title
+        await api.post(blogsBaseUrl)
+            .send(payloadNoTitle)
+            .expect(400)
+
+        const payloadNoAuthor = { ...initialData.dummyBlog }
+        delete payloadNoAuthor.author
+        await api.post(blogsBaseUrl)
+            .send(payloadNoAuthor)
+            .expect(400)
     })
 })
 
