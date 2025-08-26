@@ -122,6 +122,15 @@ describe('API test suite', () => {
             .send(payloadNoAuthor)
             .expect(400)
     })
+
+    test('DELETE request works.', async () => {
+        let response
+        response = await api.get(blogsBaseUrl)
+            .expect(200)
+        const blogToDelete = response.body[0]
+        await api.delete(`${blogsBaseUrl}/${blogToDelete.id}`)
+            .expect(200)
+    })
 })
 
 after(async () => {
