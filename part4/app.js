@@ -21,6 +21,8 @@ app.use(blogsRoutes)
 app.use(middlewares.unknownEndpoint)
 app.use(middlewares.errorHandler)
 
+
+mongoose.set('returnOriginal', false) // https://mongoosejs.com/docs/5.x/docs/api/model.html#model_Model.findByIdAndUpdate
 mongoose
     .connect(config.MONGODB_URI)
     .then(() => {
