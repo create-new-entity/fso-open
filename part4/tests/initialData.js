@@ -1,4 +1,4 @@
-const initialData = [
+const initialBlogs = [
     {
         'author': 'Robert Louis Stevenson',
         'title': 'Strange Case of Dr Jekyll and Mr Hyde',
@@ -18,5 +18,17 @@ const initialData = [
         'likes': 20
     }
 ]
+
+const dummyBlog = {
+    'author': 'George Orwell',
+    'title': '1984',
+    'url': 'https://en.wikipedia.org/wiki/Nineteen_Eighty-Four',
+    'likes': 15
+}
+
+const initialData = {
+    initialBlogs,
+    dummyBlog
+}
 
 module.exports = initialData

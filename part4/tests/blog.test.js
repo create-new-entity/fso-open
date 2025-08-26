@@ -43,7 +43,7 @@ describe('Favorite blog suite', () => {
 describe('API test suite', () => {
     beforeEach(async () => {
         await Blog.deleteMany({})
-        const savePromises = initialData.map((initialD) => {
+        const savePromises = initialData.initialBlogs.map((initialD) => {
             return new Blog(initialD).save()
         })
         await Promise.all(savePromises)
@@ -53,7 +53,7 @@ describe('API test suite', () => {
         const response = await api.get('/api/blogs')
             .expect(200)
             .expect('Content-Type', /application\/json/)
-        assert.strictEqual(response.body.length, initialData.length)
+        assert.strictEqual(response.body.length, initialData.initialBlogs.length)
     })
 
     test('Unique identifier property is "id", not something else.', async () => {
@@ -65,6 +65,28 @@ describe('API test suite', () => {
         const expectedKeys = [ 'id', 'title', 'author', 'url', 'likes' ].sort()
         assert.deepStrictEqual(keysInBlog, expectedKeys)
         assert.ok(areIdsUniq(blogs))
+    })
+
+    test('POST request works.', async () => {
+        let response
+        response = await api.get('/api/blogs')
+            .expect(200)
+            .expect('Content-Type', /application\/json/)
+        const nBlogsBefore = response.body.length
+
+        response = await api.post('/api/blogs')
+            .send(initialData.dummyBlog)
+            .expect(201)
+            .expect('Content-Type', /application\/json/)
+        const createdBlog = response.body
+
+        response = await api.get('/api/blogs')
+            .expect(200)
+            .expect('Content-Type', /application\/json/)
+        const nBlogsAfter = response.body.length
+
+        assert.equal(nBlogsBefore + 1, nBlogsAfter)
+        assert.deepStrictEqual({ ...initialData.dummyBlog, id: createdBlog.id }, createdBlog)
     })
 })
 
