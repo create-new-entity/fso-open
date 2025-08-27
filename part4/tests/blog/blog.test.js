@@ -1,13 +1,13 @@
 const { test, describe, beforeEach, after } = require('node:test')
 const assert = require('node:assert')
-const listHelper = require('../utils/list_helper')
+const listHelper = require('../../utils/list_helper')
 const testDataBlogs = require('./testData')
 const initialData = require('./initialData')
-const app = require('../app')
+const app = require('../../app')
 const supertest = require('supertest')
-const Blog = require('../models/Blog')
+const Blog = require('../../models/Blog')
 const { areIdsUniq } = require('./testUtils')
-const { default: mongoose } = require('mongoose')
+const mongoose = require('mongoose')
 const api = supertest(app)
 
 const blogsBaseUrl = '/api/blogs'
