@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 const baseURL = '/api/users'
 
 usersRoutes.get(baseURL, async (request, response) => {
-    const users = await User.find({})
+    const users = await User.find({}).populate('blogs')
     response.json(users)
 })
 
@@ -27,7 +27,8 @@ usersRoutes.post(baseURL, async (request, response) => {
     const user = new User({
         username,
         name,
-        passwordHash
+        passwordHash,
+        blogs: []
     })
 
     const savedUser = await user.save()
