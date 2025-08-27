@@ -6,3 +6,48 @@ Content-Type: application/json
     "name": "his_name",
     "password": "some_random_nonsense"
 }
+
+###
+
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "te",
+    "name": "his_name",
+    "password": "some_random_nonsense"
+}
+
+
+###
+
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "test_user",
+    "name": "hi",
+    "password": "some_random_nonsense"
+}
+
+
+###
+
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "test_user",
+    "name": "hi",
+    "password": "so"
+}
+
+###
+
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "test_user",
+    "name": "hi"
+}

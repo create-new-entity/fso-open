@@ -12,6 +12,10 @@ const errorHandler = (error, request, response, next) => {
     } else if (error.name === 'ValidationError') {
         return response.status(400).json({ error: error.message })
     }
+    else if(error.name === 'MongoServerError' && error.message.includes('duplicate key error collection')) {
+        const duplicateField = Object.keys(error['keyValue'])[0]
+        return response.status(400).json({ error: `Duplicate ${duplicateField} is not allowed.` })
+    }
 
     next(error)
 }

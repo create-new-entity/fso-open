@@ -7,8 +7,8 @@ const blogsRoutes = require('./controllers/blogs')
 const usersRoutes = require('./controllers/users')
 const middlewares = require('./utils/middleware')
 
-morgan.token('requestBody', function getId (req) {
-    return req.body
+morgan.token('requestBody', function getRequestBody (req) {
+    return JSON.stringify(req.body)
 })
 
 const express = require('express')
