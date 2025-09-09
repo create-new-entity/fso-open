@@ -1,8 +1,18 @@
 const Blog = require('../models/Blog')
 const User = require('../models/User')
 const blogsRoutes = require('express').Router()
+const jwt = require('jsonwebtoken')
+
 
 const baseURL = '/api/blogs'
+
+const getTokenFrom = (request) => {
+    const authorization = request.get('authorization')
+    if (authorization && authorization.startsWith('Bearer ')) {
+        return authorization.replace('Bearer ', '')
+    }
+    return null
+}
 
 blogsRoutes.get(baseURL, async (request, response) => {
     const blogs = await Blog.find({}).populate('user')
@@ -11,18 +21,27 @@ blogsRoutes.get(baseURL, async (request, response) => {
 
 blogsRoutes.post(baseURL, async (request, response) => {
 
-    const allUsers = await User.find({})
-    const candidateUser = allUsers[0]
+    const tokenInRequest = getTokenFrom(request)
 
-    console.log('allUsers', allUsers)
+    if(!tokenInRequest) {
+        response.status(401).json({ error: 'Token not provided.' })
+    }
+
+    const decodedToken = jwt.verify(tokenInRequest, process.env.JWT_SECRET)
+
+    if(!decodedToken.id) {
+        response.status(401).json({ error: 'Invalid token' })
+    }
+
+    const candidateUser = await User.findById(decodedToken.id)
+    if (!candidateUser) {
+        return response.status(400).json({ error: 'UserId missing or not valid' })
+    }
 
     const blogToCreate = request.body
     blogToCreate.user = candidateUser._id
     const blog = new Blog(blogToCreate)
     const result = await blog.save()
-
-    console.log('blogToCreate', blogToCreate)
-    console.log('result', result)
 
     candidateUser.blogs = [
         ...candidateUser.blogs,
