@@ -4,7 +4,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc
 
 {
     "author": "George Orwell",
-    "title": "Blog with token 3",
+    "title": "Blog with token 5",
     "url": "https://en.wikipedia.org/wiki/Nineteen_Eighty-Four",
     "likes": 30
 }

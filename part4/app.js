@@ -20,6 +20,7 @@ const app = express()
 app.use(express.json())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :requestBody'))
 
+app.use(middlewares.tokenExtractor)
 app.use(loginRouter)
 app.use(blogsRoutes)
 app.use(usersRoutes)

@@ -6,14 +6,6 @@ const jwt = require('jsonwebtoken')
 
 const baseURL = '/api/blogs'
 
-const getTokenFrom = (request) => {
-    const authorization = request.get('authorization')
-    if (authorization && authorization.startsWith('Bearer ')) {
-        return authorization.replace('Bearer ', '')
-    }
-    return null
-}
-
 blogsRoutes.get(baseURL, async (request, response) => {
     const blogs = await Blog.find({}).populate('user')
     response.json(blogs)
@@ -21,7 +13,7 @@ blogsRoutes.get(baseURL, async (request, response) => {
 
 blogsRoutes.post(baseURL, async (request, response) => {
 
-    const tokenInRequest = getTokenFrom(request)
+    const tokenInRequest = request.token
 
     if(!tokenInRequest) {
         response.status(401).json({ error: 'Token not provided.' })
