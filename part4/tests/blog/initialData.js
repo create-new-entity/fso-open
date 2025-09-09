@@ -26,6 +26,7 @@ const dummyBlog = {
     'likes': 15
 }
 
+
 const initialData = {
     initialBlogs,
     dummyBlog
