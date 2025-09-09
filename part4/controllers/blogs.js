@@ -13,13 +13,13 @@ blogsRoutes.get(baseURL, async (request, response) => {
 
 blogsRoutes.post(baseURL, async (request, response) => {
 
-    const tokenInRequest = request.token
+    const token = request.token
 
-    if(!tokenInRequest) {
+    if(!token) {
         response.status(401).json({ error: 'Token not provided.' })
     }
 
-    const decodedToken = jwt.verify(tokenInRequest, process.env.JWT_SECRET)
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
 
     if(!decodedToken.id) {
         response.status(401).json({ error: 'Invalid token' })
@@ -45,7 +45,42 @@ blogsRoutes.post(baseURL, async (request, response) => {
 })
 
 blogsRoutes.delete(`${baseURL}/:id`, async (req, res) => {
+    const token = req.token
+
+    if(!token) {
+        res.status(401).json({ error: 'Token not provided.' })
+        return
+    }
+
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
+
+    if(!decodedToken.id) {
+        res.status(401).json({ error: 'Invalid token' })
+        return
+    }
+
+    const candidateUser = await User.findById(decodedToken.id)
+    if (!candidateUser) {
+        return res.status(400).json({ error: 'UserId missing or not valid' })
+    }
+    
+    const blogToBeDeleted = await Blog.findById(req.params.id)
+
+    const isAllowedToDelete = blogToBeDeleted.user.toString() === candidateUser._id.toString()
+
+    if(!isAllowedToDelete) {
+        res.status(401).json({ error: 'User does not have permission to delete this blog.' })
+        return
+    }
+
     await Blog.findByIdAndDelete(req.params.id)
+
+    candidateUser.blogs = candidateUser.blogs.filter((blogId) => {
+        return blogId.toString() !== req.params.id
+    })
+
+    await candidateUser.save()
+
     res.status(200).end()
 })
 
