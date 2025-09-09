@@ -1,7 +1,6 @@
 const Blog = require('../models/Blog')
-const User = require('../models/User')
 const blogsRoutes = require('express').Router()
-const jwt = require('jsonwebtoken')
+const { userExtractor } = require('../utils/middleware')
 
 
 const baseURL = '/api/blogs'
@@ -11,25 +10,9 @@ blogsRoutes.get(baseURL, async (request, response) => {
     response.json(blogs)
 })
 
-blogsRoutes.post(baseURL, async (request, response) => {
+blogsRoutes.post(baseURL, userExtractor, async (request, response) => {
 
-    const token = request.token
-
-    if(!token) {
-        response.status(401).json({ error: 'Token not provided.' })
-    }
-
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
-
-    if(!decodedToken.id) {
-        response.status(401).json({ error: 'Invalid token' })
-    }
-
-    const candidateUser = await User.findById(decodedToken.id)
-    if (!candidateUser) {
-        return response.status(400).json({ error: 'UserId missing or not valid' })
-    }
-
+    const candidateUser = request.user
     const blogToCreate = request.body
     blogToCreate.user = candidateUser._id
     const blog = new Blog(blogToCreate)
@@ -44,28 +27,13 @@ blogsRoutes.post(baseURL, async (request, response) => {
     response.status(201).json(result)
 })
 
-blogsRoutes.delete(`${baseURL}/:id`, async (req, res) => {
-    const token = req.token
-
-    if(!token) {
-        res.status(401).json({ error: 'Token not provided.' })
-        return
-    }
-
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
-
-    if(!decodedToken.id) {
-        res.status(401).json({ error: 'Invalid token' })
-        return
-    }
-
-    const candidateUser = await User.findById(decodedToken.id)
-    if (!candidateUser) {
-        return res.status(400).json({ error: 'UserId missing or not valid' })
-    }
+blogsRoutes.delete(`${baseURL}/:id`, userExtractor, async (req, res) => {
     
+    const candidateUser = req.user
     const blogToBeDeleted = await Blog.findById(req.params.id)
-
+    if(!blogToBeDeleted) {
+        res.status(400).json({ error: 'Blog not found.' })
+    }
     const isAllowedToDelete = blogToBeDeleted.user.toString() === candidateUser._id.toString()
 
     if(!isAllowedToDelete) {

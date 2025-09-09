@@ -1,3 +1,6 @@
+
+const User = require('../models/User')
+const jwt = require('jsonwebtoken')
 const logger = require('./logger')
 
 const unknownEndpoint = (request, response) => {
@@ -12,6 +15,33 @@ const tokenExtractor = (request, response, next) => {
     next()
 }
 
+const userExtractor = async (request, response, next) => {
+    const token = request.token
+
+    if(!token) {
+        next({ name: 'JsonWebTokenError' })
+        return
+    }
+
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
+
+    if(!decodedToken.id) {
+        next({ name: 'JsonWebTokenError' })
+        return
+    }
+
+    const candidateUser = await User.findById(decodedToken.id)
+    if (!candidateUser) {
+        next({
+            name: 'InvalidUser',
+            message: 'User not found.'
+        })
+        return
+    }
+    request.user = candidateUser
+    next()
+}
+
 const errorHandler = (error, request, response, next) => {
     logger.error(error.message)
 
@@ -22,11 +52,14 @@ const errorHandler = (error, request, response, next) => {
         return response.status(400).json({ error: error.message })
     }
     else if(error.name === 'JsonWebTokenError') {
-        return response.status(401).json({ error: 'Invalid token' })
+        return response.status(401).json({ error: 'Invalid token or token not provided.' })
     }
     else if(error.name === 'MongoServerError' && error.message.includes('duplicate key error collection')) {
         const duplicateField = Object.keys(error['keyValue'])[0]
         return response.status(400).json({ error: `Duplicate ${duplicateField} is not allowed.` })
+    }
+    else if(error.name === 'InvalidUser') {
+        return response.status()
     }
 
     next(error)
@@ -35,7 +68,8 @@ const errorHandler = (error, request, response, next) => {
 const middlewares = {
     unknownEndpoint,
     errorHandler,
-    tokenExtractor
+    tokenExtractor,
+    userExtractor
 }
 
 module.exports = middlewares
