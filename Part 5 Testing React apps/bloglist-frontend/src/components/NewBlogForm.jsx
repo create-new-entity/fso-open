@@ -1,8 +1,10 @@
 import { useState } from "react"
 import blogs from "../services/blogs"
+import { handleNotification } from "./Notification"
 
 
-const NewBlogForm = ({ setBlogs }) => {
+const NewBlogForm = (props) => {
+    const { setBlogs, setNotification } = props
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
     const [url, setUrl] = useState('')
@@ -18,12 +20,26 @@ const NewBlogForm = ({ setBlogs }) => {
     const handleUrlChange = (e) => setUrl(e.target.value)
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        const createdBlog = await blogs.createNewBlog({ title, author, url })
-        setBlogs((prevBlogs) => {
-            return [...prevBlogs, createdBlog]
-        })
-        clearAllInputStates()
+        try {
+            e.preventDefault()
+            const createdBlog = await blogs.createNewBlog({ title, author, url })
+            setBlogs((prevBlogs) => {
+                return [...prevBlogs, createdBlog]
+            })
+            clearAllInputStates()
+            const successNotification = {
+                success: true,
+                msg: 'Created new blog.'
+            }
+            handleNotification(successNotification, setNotification)
+        }
+        catch(e) {
+            const failedNotification = {
+                success: false,
+                msg: 'Failed to create new blog.'
+            }
+            handleNotification(failedNotification, setNotification)
+        }
     }
 
     return (

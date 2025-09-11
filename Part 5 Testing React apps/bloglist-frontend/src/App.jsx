@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import NewBlogForm from './components/NewBlogForm'
+import Notification, { handleNotification } from './components/Notification'
 
 const LOGGED_IN_USER = 'loggedInUser'
 
 const Login = (props) => {
-  const { setUser } = props
+  const { setUser, setNotification } = props
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -20,11 +21,26 @@ const Login = (props) => {
 
   const handleLogin = async (e) => {
     e.preventDefault()
-    const loggedInUser = await blogService.login({ username, password })
-    setUser(loggedInUser)
-    window.localStorage.setItem(LOGGED_IN_USER, JSON.stringify(loggedInUser))
-    setUsername('')
-    setPassword('')
+    try {
+      const loggedInUser = await blogService.login({ username, password })
+      setUser(loggedInUser)
+      window.localStorage.setItem(LOGGED_IN_USER, JSON.stringify(loggedInUser))
+      setUsername('')
+      setPassword('')
+
+      const successNotification = {
+          success: true,
+          msg: 'Logged in.'
+      }
+      handleNotification(successNotification, setNotification)
+    }
+    catch(e) {
+      const failedNotification = {
+          success: false,
+          msg: 'Login failed.'
+      }
+      handleNotification(failedNotification, setNotification)
+    }
   }
 
   return (
@@ -58,6 +74,7 @@ const Login = (props) => {
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
+  const [notification, setNotification] = useState(null)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -76,12 +93,23 @@ const App = () => {
   const handleLogOut = () => {
     setUser(null)
     window.localStorage.removeItem(LOGGED_IN_USER)
+    const successNotification = {
+        success: true,
+        msg: 'Logged out.'
+    }
+    handleNotification(successNotification, setNotification)
   }
 
   return (
     <div>
       {
-        !user && <Login setUser={setUser}/>
+        notification && <Notification
+          success={notification.success}
+          msg={notification.msg}
+        />
+      }
+      {
+        !user && <Login setUser={setUser} setNotification={setNotification}/>
       }
       {
         user && <>
@@ -90,7 +118,7 @@ const App = () => {
             <span>{user.name} logged in</span>
             <button style={{ marginLeft: '15px' }} onClick={handleLogOut}>Logout</button>
           </div>
-          <NewBlogForm setBlogs={setBlogs}/>
+          <NewBlogForm setBlogs={setBlogs} setNotification={setNotification}/>
           {blogs.map(blog =>
             <Blog key={blog.id} blog={blog} />
           )}
