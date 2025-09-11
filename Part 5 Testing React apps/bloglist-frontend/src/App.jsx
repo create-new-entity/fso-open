@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 
+const LOGGED_IN_USER = 'loggedInUser'
+
 const Login = (props) => {
   const { setUser } = props
   const [username, setUsername] = useState('')
@@ -19,6 +21,7 @@ const Login = (props) => {
     e.preventDefault()
     const loggedInUser = await blogService.login({ username, password })
     setUser(loggedInUser)
+    window.localStorage.setItem(LOGGED_IN_USER, JSON.stringify(loggedInUser))
     setUsername('')
     setPassword('')
   }
@@ -61,6 +64,18 @@ const App = () => {
     )  
   }, [])
 
+  useEffect(() => {
+    const existingLoggedInUser = JSON.parse(window.localStorage.getItem(LOGGED_IN_USER))
+    if(existingLoggedInUser) {
+      setUser(existingLoggedInUser)
+    }
+  }, [])
+
+  const handleLogOut = () => {
+    setUser(null)
+    window.localStorage.removeItem(LOGGED_IN_USER)
+  }
+
   return (
     <div>
       {
@@ -69,7 +84,10 @@ const App = () => {
       {
         user && <>
           <h2>Blogs</h2>
-          <p>{user.name} logged in</p>
+          <div style={{ marginBottom: '20px' }}>
+            <span>{user.name} logged in</span>
+            <button style={{ marginLeft: '15px' }} onClick={handleLogOut}>Logout</button>
+          </div>
           {blogs.map(blog =>
             <Blog key={blog.id} blog={blog} />
           )}
