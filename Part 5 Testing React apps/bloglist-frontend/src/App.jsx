@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
+import NewBlogForm from './components/NewBlogForm'
 
 const LOGGED_IN_USER = 'loggedInUser'
 
@@ -68,6 +69,7 @@ const App = () => {
     const existingLoggedInUser = JSON.parse(window.localStorage.getItem(LOGGED_IN_USER))
     if(existingLoggedInUser) {
       setUser(existingLoggedInUser)
+      blogService.setToken(existingLoggedInUser.token)
     }
   }, [])
 
@@ -88,6 +90,7 @@ const App = () => {
             <span>{user.name} logged in</span>
             <button style={{ marginLeft: '15px' }} onClick={handleLogOut}>Logout</button>
           </div>
+          <NewBlogForm setBlogs={setBlogs}/>
           {blogs.map(blog =>
             <Blog key={blog.id} blog={blog} />
           )}
