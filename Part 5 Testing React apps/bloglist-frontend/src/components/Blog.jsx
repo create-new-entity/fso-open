@@ -45,6 +45,7 @@ const Blog = ({ blog, setBlogs }) => {
           <div>
             {blog.likes} <button onClick={handleLike}>Like</button>
           </div>
+          <p>Added by {blog.user.username}</p>
         </div>
       }
     </div>  
