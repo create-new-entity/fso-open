@@ -5,15 +5,15 @@ const { userExtractor } = require('../utils/middleware')
 
 const baseURL = '/api/blogs'
 
-blogsRoutes.get(baseURL, async (request, response) => {
+blogsRoutes.get(baseURL, async (req, res) => {
     const blogs = await Blog.find({}).populate('user')
-    response.json(blogs)
+    res.json(blogs)
 })
 
-blogsRoutes.post(baseURL, userExtractor, async (request, response) => {
+blogsRoutes.post(baseURL, userExtractor, async (req, res) => {
 
-    const candidateUser = request.user
-    const blogToCreate = request.body
+    const candidateUser = req.user
+    const blogToCreate = req.body
     blogToCreate.user = candidateUser._id
     const blog = new Blog(blogToCreate)
     const result = await blog.save()
@@ -24,7 +24,7 @@ blogsRoutes.post(baseURL, userExtractor, async (request, response) => {
     ]
     await candidateUser.save()
 
-    response.status(201).json(result)
+    res.status(201).json(result)
 })
 
 blogsRoutes.delete(`${baseURL}/:id`, userExtractor, async (req, res) => {
@@ -53,7 +53,11 @@ blogsRoutes.delete(`${baseURL}/:id`, userExtractor, async (req, res) => {
 })
 
 blogsRoutes.put(`${baseURL}/:id`, async (req, res) => {
-    const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, req.body)
+    const candidateUser = req.user
+    const blogToUpdate = req.body
+    blogToUpdate.user = candidateUser._id
+
+    const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, blogToUpdate)
     res.status(200).send(updatedBlog)
 })
 

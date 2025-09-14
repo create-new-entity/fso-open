@@ -1,14 +1,22 @@
 import { useState } from "react"
+import blogService from '../services/blogs'
 
-const Blog = ({ blog }) => {
+
+const Blog = ({ blog, setBlogs }) => {
   const [showDetails, setShowDetails] = useState(false)
 
   const handleVisibility = () => {
     setShowDetails(!showDetails)
   }
 
-  const handleLike = () => {
-    consnole.log('Handle like.')
+  const handleLike = async () => {
+    const updatedBlog = await blogService.updateBlog({ ...blog, likes: blog.likes + 1,  user: blog.user.id })
+    setBlogs((prevBlogs) => {
+      const newBlogs = [...prevBlogs]
+      const newBlog = newBlogs.find(nBlog => nBlog.id === updatedBlog.id)
+      newBlog.likes = updatedBlog.likes
+      return newBlogs
+    })
   }
 
   const blogStyle = {
