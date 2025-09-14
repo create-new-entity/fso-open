@@ -2,9 +2,9 @@ import { useState } from "react"
 import blogs from "../services/blogs"
 import { handleNotification } from "./Notification"
 
-
+// NewBlogForm component is exrcise 5.6
 const NewBlogForm = (props) => {
-    const { setBlogs, setNotification } = props
+    const { setBlogs, setNotification, togglableRef } = props
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
     const [url, setUrl] = useState('')
@@ -32,6 +32,7 @@ const NewBlogForm = (props) => {
                 msg: 'Created new blog.'
             }
             handleNotification(successNotification, setNotification)
+            togglableRef.current.toggleVisibility()
         }
         catch(e) {
             const failedNotification = {
