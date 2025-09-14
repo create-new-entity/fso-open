@@ -79,9 +79,12 @@ const App = () => {
   const togglableRef = useRef()
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
+    blogService.getAll().then((blogs) => {
+      blogs.sort((blog1, blog2) => {
+        return blog2.likes - blog1.likes
+      })
       setBlogs( blogs )
-    )  
+    })  
   }, [])
 
   useEffect(() => {

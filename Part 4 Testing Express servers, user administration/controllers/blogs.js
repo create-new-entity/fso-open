@@ -52,7 +52,7 @@ blogsRoutes.delete(`${baseURL}/:id`, userExtractor, async (req, res) => {
     res.status(200).end()
 })
 
-blogsRoutes.put(`${baseURL}/:id`, async (req, res) => {
+blogsRoutes.put(`${baseURL}/:id`, userExtractor, async (req, res) => {
     const candidateUser = req.user
     const blogToUpdate = req.body
     blogToUpdate.user = candidateUser._id

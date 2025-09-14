@@ -15,7 +15,9 @@ const Blog = ({ blog, setBlogs }) => {
       const newBlogs = [...prevBlogs]
       const newBlog = newBlogs.find(nBlog => nBlog.id === updatedBlog.id)
       newBlog.likes = updatedBlog.likes
-      return newBlogs
+      return newBlogs.sort((blog1, blog2) => {
+        return blog2.likes - blog1.likes
+      })
     })
   }
 
