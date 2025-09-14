@@ -1,8 +1,9 @@
 import { useState } from "react"
 import blogService from '../services/blogs'
+import { handleNotification } from "./Notification"
 
 
-const Blog = ({ blog, setBlogs }) => {
+const Blog = ({ blog, setBlogs, loggedInUser, setNotification }) => {
   const [showDetails, setShowDetails] = useState(false)
 
   const handleVisibility = () => {
@@ -33,6 +34,28 @@ const Blog = ({ blog, setBlogs }) => {
     marginLeft: '10px'
   }
 
+  const showDeleteButton = loggedInUser.username === blog.user.username
+
+  const handleDelete = async () => {
+    if(window.confirm(`Do you want to delete ${blog.title}?`)) {
+      try {
+        await blogService.deleteBlog(blog)
+        setBlogs((prevBlogs) => {
+          return prevBlogs.filter((pBlog) => {
+            return pBlog.id !== blog.id
+          })
+        })
+      }
+      catch(e) {
+        const failedNotification = {
+            success: false,
+            msg: 'Blog deletion failed.'
+        }
+        handleNotification(failedNotification, setNotification)
+      }
+    }
+  }
+
   return (
     <div style={blogStyle}>
       <div>
@@ -48,6 +71,12 @@ const Blog = ({ blog, setBlogs }) => {
             {blog.likes} <button onClick={handleLike}>Like</button>
           </div>
           <p>Added by {blog.user.username}</p>
+          {
+            showDeleteButton &&
+            <div>
+              <button onClick={handleDelete}>Delete</button>
+            </div>
+          }
         </div>
       }
     </div>  
