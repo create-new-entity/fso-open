@@ -2,8 +2,9 @@ import { useState, useEffect, useRef } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import NewBlogForm from './components/NewBlogForm'
-import Notification, { handleNotification } from './components/Notification'
+import Notification from './components/Notification'
 import Togglable from './components/Togglable'
+import { handleNotification } from './utils'
 
 const LOGGED_IN_USER = 'loggedInUser'
 
@@ -30,15 +31,16 @@ const Login = (props) => {
       setPassword('')
 
       const successNotification = {
-          success: true,
-          msg: 'Logged in.'
+        success: true,
+        msg: 'Logged in.'
       }
       handleNotification(successNotification, setNotification)
     }
+    // eslint-disable-next-line no-unused-vars
     catch(e) {
       const failedNotification = {
-          success: false,
-          msg: 'Login failed.'
+        success: false,
+        msg: 'Login failed.'
       }
       handleNotification(failedNotification, setNotification)
     }
@@ -84,7 +86,7 @@ const App = () => {
         return blog2.likes - blog1.likes
       })
       setBlogs( blogs )
-    })  
+    })
   }, [])
 
   useEffect(() => {
@@ -99,8 +101,8 @@ const App = () => {
     setUser(null)
     window.localStorage.removeItem(LOGGED_IN_USER)
     const successNotification = {
-        success: true,
-        msg: 'Logged out.'
+      success: true,
+      msg: 'Logged out.'
     }
     handleNotification(successNotification, setNotification)
   }

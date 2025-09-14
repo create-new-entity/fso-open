@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useState } from 'react'
 import blogService from '../services/blogs'
-import { handleNotification } from "./Notification"
+import { handleNotification } from '../utils'
 
 
 const Blog = ({ blog, setBlogs, loggedInUser, setNotification }) => {
@@ -46,10 +46,11 @@ const Blog = ({ blog, setBlogs, loggedInUser, setNotification }) => {
           })
         })
       }
+      // eslint-disable-next-line no-unused-vars
       catch(e) {
         const failedNotification = {
-            success: false,
-            msg: 'Blog deletion failed.'
+          success: false,
+          msg: 'Blog deletion failed.'
         }
         handleNotification(failedNotification, setNotification)
       }
@@ -79,7 +80,7 @@ const Blog = ({ blog, setBlogs, loggedInUser, setNotification }) => {
           }
         </div>
       }
-    </div>  
+    </div>
   )
 }
 

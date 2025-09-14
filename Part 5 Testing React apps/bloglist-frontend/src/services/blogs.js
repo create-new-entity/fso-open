@@ -45,35 +45,35 @@ const createNewBlog = async ({ title, author, url }) => {
 }
 
 const updateBlog = async (blog) => {
-    const updateBlogUrl = `${server}${blogsBaseUrl}/${blog.id}`
-    const headers = {
-      headers: {
-        'Authorization': `Bearer ${getToken()}`
-      }
+  const updateBlogUrl = `${server}${blogsBaseUrl}/${blog.id}`
+  const headers = {
+    headers: {
+      'Authorization': `Bearer ${getToken()}`
     }
+  }
 
-    const response = await axios.put(
-      updateBlogUrl,
-      blog,
-      headers
-    )
+  const response = await axios.put(
+    updateBlogUrl,
+    blog,
+    headers
+  )
 
-    return response.data
+  return response.data
 }
 
 const deleteBlog = async (blog) => {
   const deleteBlogUrl = `${server}${blogsBaseUrl}/${blog.id}`
 
   const headers = {
-      headers: {
-        'Authorization': `Bearer ${getToken()}`
-      }
+    headers: {
+      'Authorization': `Bearer ${getToken()}`
     }
-    
-    await axios.delete(
-      deleteBlogUrl,
-      headers
-    )
+  }
+
+  await axios.delete(
+    deleteBlogUrl,
+    headers
+  )
 }
 
 export default {
