@@ -3,14 +3,14 @@ import blogService from '../services/blogs'
 import { handleNotification } from '../utils'
 
 
-const Blog = ({ blog, setBlogs, loggedInUser, setNotification }) => {
+const Blog = ({ blog, setBlogs, loggedInUser, setNotification, handleLike }) => {
   const [showDetails, setShowDetails] = useState(false)
 
   const handleVisibility = () => {
     setShowDetails(!showDetails)
   }
 
-  const handleLike = async () => {
+  const customLikeHandler = async () => {
     const updatedBlog = await blogService.updateBlog({ ...blog, likes: blog.likes + 1,  user: blog.user.id })
     setBlogs((prevBlogs) => {
       const newBlogs = [...prevBlogs]
@@ -21,6 +21,8 @@ const Blog = ({ blog, setBlogs, loggedInUser, setNotification }) => {
       })
     })
   }
+
+  const likeHandler = handleLike ?? customLikeHandler
 
   const blogStyle = {
     padding: 10,
@@ -70,7 +72,7 @@ const Blog = ({ blog, setBlogs, loggedInUser, setNotification }) => {
           <p className='blog-url'>{blog.url}</p>
           <div style={{ display: 'flex', justifyContent: 'flex-start'}}>
             <div className='blog-likes'>{blog.likes}</div>
-            <button onClick={handleLike}>Like</button>
+            <button onClick={likeHandler}>Like</button>
           </div>
           <p>Added by {blog.user.username}</p>
           {
