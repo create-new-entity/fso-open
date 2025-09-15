@@ -53,6 +53,7 @@ const Login = (props) => {
           <label>
             Username
             <input
+              aria-label='Username'
               value={username}
               onChange={handleUserNameChange}
             />
@@ -62,6 +63,7 @@ const Login = (props) => {
           <label>
             Password
             <input
+              aria-label='Password'
               value={password}
               onChange={handlePasswordChange}
               type='password'
@@ -126,7 +128,6 @@ const App = () => {
         success: false,
         msg: 'Failed to create new blog.'
       }
-      console.log('e', e)
       handleNotification(failedNotification, setNotification)
     }
   }
@@ -143,7 +144,8 @@ const App = () => {
         !user && <Login setUser={setUser} setNotification={setNotification}/>
       }
       {
-        user && <>
+        user &&
+        <div>
           <h2>Blogs</h2>
           <div style={{ marginBottom: '20px' }}>
             <span>{user.name} logged in</span>
@@ -154,16 +156,18 @@ const App = () => {
               <NewBlogForm handleSave={handleSave}/>
             </Togglable>
           </div>
-          {blogs.map(blog =>
-            <Blog
-              key={blog.id}
-              blog={blog}
-              setBlogs={setBlogs}
-              loggedInUser={user}
-              setNotification={setNotification}
-            />
-          )}
-        </>
+          {
+            blogs.map(blog =>
+              <Blog
+                key={blog.id}
+                blog={blog}
+                setBlogs={setBlogs}
+                loggedInUser={user}
+                setNotification={setNotification}
+              />
+            )
+          }
+        </div>
       }
     </div>
   )
