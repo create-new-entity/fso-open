@@ -107,6 +107,30 @@ const App = () => {
     handleNotification(successNotification, setNotification)
   }
 
+  const handleSave = async (title, author, url) => {
+    try {
+      const createdBlog = await blogService.createNewBlog({ title, author, url })
+      setBlogs((prevBlogs) => {
+        return [...prevBlogs, createdBlog]
+      })
+      const successNotification = {
+        success: true,
+        msg: 'Created new blog.'
+      }
+      handleNotification(successNotification, setNotification)
+      togglableRef.current.toggleVisibility()
+    }
+    // eslint-disable-next-line no-unused-vars
+    catch(e) {
+      const failedNotification = {
+        success: false,
+        msg: 'Failed to create new blog.'
+      }
+      console.log('e', e)
+      handleNotification(failedNotification, setNotification)
+    }
+  }
+
   return (
     <div>
       {
@@ -127,11 +151,7 @@ const App = () => {
           </div>
           <div style={{ marginBottom: '10px' }}>
             <Togglable buttonLabel={'Create New Blog'} ref={togglableRef}>
-              <NewBlogForm
-                setBlogs={setBlogs}
-                setNotification={setNotification}
-                togglableRef={togglableRef}
-              />
+              <NewBlogForm handleSave={handleSave}/>
             </Togglable>
           </div>
           {blogs.map(blog =>

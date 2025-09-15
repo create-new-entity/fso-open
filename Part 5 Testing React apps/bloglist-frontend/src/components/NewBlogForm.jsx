@@ -1,10 +1,8 @@
 import { useState } from 'react'
-import blogs from '../services/blogs'
-import { handleNotification } from '../utils'
 
 // NewBlogForm component is exrcise 5.6
 const NewBlogForm = (props) => {
-  const { setBlogs, setNotification, togglableRef } = props
+  const { handleSave } = props
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
@@ -20,28 +18,9 @@ const NewBlogForm = (props) => {
   const handleUrlChange = (e) => setUrl(e.target.value)
 
   const handleSubmit = async (e) => {
-    try {
-      e.preventDefault()
-      const createdBlog = await blogs.createNewBlog({ title, author, url })
-      setBlogs((prevBlogs) => {
-        return [...prevBlogs, createdBlog]
-      })
-      clearAllInputStates()
-      const successNotification = {
-        success: true,
-        msg: 'Created new blog.'
-      }
-      handleNotification(successNotification, setNotification)
-      togglableRef.current.toggleVisibility()
-    }
-    // eslint-disable-next-line no-unused-vars
-    catch(e) {
-      const failedNotification = {
-        success: false,
-        msg: 'Failed to create new blog.'
-      }
-      handleNotification(failedNotification, setNotification)
-    }
+    e.preventDefault()
+    await handleSave(title, author, url)
+    clearAllInputStates()
   }
 
   return (
@@ -50,19 +29,19 @@ const NewBlogForm = (props) => {
         <h2>Create New</h2>
         <div>
           <label>
-                        title:
+            title:
             <input value={title} onChange={handleTitleChange}/>
           </label>
         </div>
         <div>
           <label>
-                        author:
+            author:
             <input value={author} onChange={handleAuthorChange}/>
           </label>
         </div>
         <div>
           <label>
-                        url:
+            url:
             <input value={url} onChange={handleUrlChange}/>
           </label>
         </div>
