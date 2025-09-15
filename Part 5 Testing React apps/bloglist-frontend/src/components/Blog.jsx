@@ -58,15 +58,15 @@ const Blog = ({ blog, setBlogs, loggedInUser, setNotification }) => {
   }
 
   return (
-    <div style={blogStyle}>
-      <div>
-        {blog.title}
+    <div style={blogStyle} className='blog'>
+      <div style={{ display: 'flex', justifyContent: 'flex-start', marginLeft: '10px' }}>
+        <div className='blog-title'>{blog.title}</div>
         <button style={visiblityButtonStyle} onClick={handleVisibility}>{showDetails ? 'Hide' : 'View'}</button>
       </div>
       {
         showDetails &&
-        <div>
-          <p>{blog.author}</p>
+        <div style={{ marginLeft: '10px' }}>
+          <p className='author'>{blog.author}</p>
           <p>{blog.url}</p>
           <div>
             {blog.likes} <button onClick={handleLike}>Like</button>
