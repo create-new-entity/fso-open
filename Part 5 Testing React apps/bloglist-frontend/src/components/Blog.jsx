@@ -66,10 +66,11 @@ const Blog = ({ blog, setBlogs, loggedInUser, setNotification }) => {
       {
         showDetails &&
         <div style={{ marginLeft: '10px' }}>
-          <p className='author'>{blog.author}</p>
-          <p>{blog.url}</p>
-          <div>
-            {blog.likes} <button onClick={handleLike}>Like</button>
+          <p className='blog-author'>{blog.author}</p>
+          <p className='blog-url'>{blog.url}</p>
+          <div style={{ display: 'flex', justifyContent: 'flex-start'}}>
+            <div className='blog-likes'>{blog.likes}</div>
+            <button onClick={handleLike}>Like</button>
           </div>
           <p>Added by {blog.user.username}</p>
           {

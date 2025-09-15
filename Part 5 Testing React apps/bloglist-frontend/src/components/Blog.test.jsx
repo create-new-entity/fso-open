@@ -7,10 +7,11 @@ test('Blog component renders content', async () => {
   const loggedInUser = { username: 'testuser' }
   const blogTitle = 'Test Blog'
   const testAuthor = 'Test Author'
+  const testUrl = 'testurl'
   const blog = {
     title: blogTitle,
     author: testAuthor,
-    url: 'test',
+    url: testUrl,
     likes: 3,
     user: loggedInUser.username
   }
@@ -34,7 +35,14 @@ test('Blog component renders content', async () => {
   const button = screen.getByText('View')
   await user.click(button)
 
-  const pAuthor = container.querySelector('.author')
+  const pAuthor = container.querySelector('.blog-author')
   expect(pAuthor).toBeDefined()
   expect(pAuthor.textContent).toBe(testAuthor)
+
+  const pUrl = container.querySelector('.blog-url')
+  expect(pUrl).toBeDefined()
+  expect(pUrl.textContent).toBe(testUrl)
+
+  const pLikes = container.querySelector('.blog-likes')
+  expect(pLikes).toBeDefined()
 })
