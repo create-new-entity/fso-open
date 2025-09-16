@@ -53,7 +53,6 @@ const Login = (props) => {
           <label>
             Username
             <input
-              aria-label='Username'
               value={username}
               onChange={handleUserNameChange}
             />
@@ -63,7 +62,6 @@ const Login = (props) => {
           <label>
             Password
             <input
-              aria-label='Password'
               value={password}
               onChange={handlePasswordChange}
               type='password'
