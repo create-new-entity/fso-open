@@ -9,6 +9,7 @@ const blogsRoutes = require('./controllers/blogs')
 const usersRoutes = require('./controllers/users')
 const middlewares = require('./utils/middleware')
 
+
 morgan.token('requestBody', function getRequestBody (req) {
     return JSON.stringify(req.body)
 })
@@ -27,6 +28,11 @@ app.use(middlewares.tokenExtractor)
 app.use(loginRouter)
 app.use(blogsRoutes)
 app.use(usersRoutes)
+
+if (process.env.NODE_ENV === 'test') {
+    const testingRouter = require('./controllers/testing')
+    app.use('/api/testing', testingRouter)
+}
 
 app.use(middlewares.unknownEndpoint)
 app.use(middlewares.errorHandler)
