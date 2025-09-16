@@ -5,6 +5,7 @@ const {
     expect,
     describe
 } = require('@playwright/test')
+const testUtils = require('./testutils')
 
 const testUser = {
     'username': 'testuser',
@@ -118,22 +119,8 @@ describe('Blog app', () => {
             })
 
             test('A blog can be liked.', async ({ page }) => {
-                const createNewBlogButton = page.getByText('Create New Blog')
-                await expect(createNewBlogButton).toBeVisible()
-                await createNewBlogButton.click()
-
-                const titleLocator = page.getByLabel('title:')
-                const authorLocator = page.getByLabel('author:')
-                const urlLocator = page.getByText('url:')
-                const createButton = page.getByText('Create', { exact: true })
-
-
-                await titleLocator.fill(testBlog.title)
-                await authorLocator.fill(testBlog.author)
-                await urlLocator.fill(testBlog.url)
-                await expect(createButton).toBeVisible()
-                await createButton.click()
-
+                await testUtils.createABlog(page, testBlog)
+                
                 let createdBlog = page.locator('.blog').nth(0)
                 const viewButton = createdBlog.getByText('View')
                 await expect(viewButton).toBeVisible()
@@ -155,22 +142,8 @@ describe('Blog app', () => {
             })
 
             test('A blog can be deleted by the user.', async ({ page }) => {
-                const createNewBlogButton = page.getByText('Create New Blog')
-                await expect(createNewBlogButton).toBeVisible()
-                await createNewBlogButton.click()
-
-                const titleLocator = page.getByLabel('title:')
-                const authorLocator = page.getByLabel('author:')
-                const urlLocator = page.getByText('url:')
-                const createButton = page.getByText('Create', { exact: true })
-
-
-                await titleLocator.fill(testBlog.title)
-                await authorLocator.fill(testBlog.author)
-                await urlLocator.fill(testBlog.url)
-                await expect(createButton).toBeVisible()
-                await createButton.click()
-
+                await testUtils.createABlog(page, testBlog)
+                
                 let createdBlog = page.locator('.blog').nth(0)
                 const viewButton = createdBlog.getByText('View')
                 await expect(viewButton).toBeVisible()
