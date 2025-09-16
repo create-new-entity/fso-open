@@ -59,26 +59,14 @@ describe('Blog app', () => {
     describe('Login tests', () => {
 
         test('Login works with correct credentials', async ({ page }) => {
-            const usernameLocator = page.getByLabel('Username')
-            const passwordLocator = page.getByLabel('Password')
-            const loginButtonLocator = page.getByText('Login')
-
-            await usernameLocator.fill(testUser.username)
-            await passwordLocator.fill(testUser.password)
-            await loginButtonLocator.click()
+            await testUtils.login(page, testUser)
 
             const loggedInText = page.getByText(`${testUser.username} logged in`)
             await expect(loggedInText).toBeVisible()
         })
 
         test('Login fails with wrong credentials', async ({ page }) => {
-            const usernameLocator = page.getByLabel('Username')
-            const passwordLocator = page.getByLabel('Password')
-            const loginButtonLocator = page.getByText('Login')
-
-            await usernameLocator.fill('wrong_user_name')
-            await passwordLocator.fill(testUser.password)
-            await loginButtonLocator.click()
+            await testUtils.login(page, { ...testUser, username: 'wrong_user_name' })
 
             const loggedInText = page.getByText(`${testUser.username} logged in`)
             expect(loggedInText).not.toBeVisible()
@@ -87,13 +75,7 @@ describe('Blog app', () => {
 
         describe('Post login features tests.', () => {
             test.beforeEach(async ({ page, request }) => {
-                const usernameLocator = page.getByLabel('Username')
-                const passwordLocator = page.getByLabel('Password')
-                const loginButtonLocator = page.getByText('Login')
-
-                await usernameLocator.fill(testUser.username)
-                await passwordLocator.fill(testUser.password)
-                await loginButtonLocator.click()
+                await testUtils.login(page, testUser)
             })
 
             test('A new blog can be created', async ({ page }) => {

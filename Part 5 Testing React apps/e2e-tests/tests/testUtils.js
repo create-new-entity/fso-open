@@ -1,6 +1,5 @@
 const { expect } = require('@playwright/test')
 
-
 const createABlog = async (page, testBlog) => {
     const createNewBlogButton = page.getByText('Create New Blog')
     await expect(createNewBlogButton).toBeVisible()
@@ -19,7 +18,18 @@ const createABlog = async (page, testBlog) => {
     await createButton.click()
 }
 
+const login = async (page, testUser) => {
+    const usernameLocator = page.getByLabel('Username')
+    const passwordLocator = page.getByLabel('Password')
+    const loginButtonLocator = page.getByText('Login')
+
+    await usernameLocator.fill(testUser.username)
+    await passwordLocator.fill(testUser.password)
+    await loginButtonLocator.click()
+}
+
 const testUtils = {
+    login,
     createABlog
 }
 
