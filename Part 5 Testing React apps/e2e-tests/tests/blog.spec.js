@@ -12,10 +12,22 @@ const testUser = {
     'password': 'password'
 }
 
+const testUser2 = {
+    'username': 'testuser2',
+    'name': 'testuser2',
+    'password': 'password'
+}
+
 const testBlog = {
     title: 'TestBlog',
     author: 'TestAuthor',
     url: 'testurl.com'
+}
+
+const testBlog2 = {
+    title: 'TestBlog2',
+    author: 'TestAuthor2',
+    url: 'testurl2.com'
 }
 
 
@@ -26,6 +38,9 @@ describe('Blog app', () => {
         await request.post('http://localhost:3003/api/testing/reset')
         await request.post('http://localhost:3003/api/users', {
             data: testUser
+        })
+        await request.post('http://localhost:3003/api/users', {
+            data: testUser2
         })
         await page.goto('http://localhost:5173')
     })
@@ -137,6 +152,37 @@ describe('Blog app', () => {
                 likesNumberDiv = createdBlog.locator('.blog-likes')
                 await expect(likesNumberDiv).toBeVisible()
                 await expect(likesNumberDiv).toContainText('1')
+            })
+
+            test('A blog can be deleted by the user.', async ({ page }) => {
+                const createNewBlogButton = page.getByText('Create New Blog')
+                await expect(createNewBlogButton).toBeVisible()
+                await createNewBlogButton.click()
+
+                const titleLocator = page.getByLabel('title:')
+                const authorLocator = page.getByLabel('author:')
+                const urlLocator = page.getByText('url:')
+                const createButton = page.getByText('Create', { exact: true })
+
+
+                await titleLocator.fill(testBlog.title)
+                await authorLocator.fill(testBlog.author)
+                await urlLocator.fill(testBlog.url)
+                await expect(createButton).toBeVisible()
+                await createButton.click()
+
+                let createdBlog = page.locator('.blog').nth(0)
+                const viewButton = createdBlog.getByText('View')
+                await expect(viewButton).toBeVisible()
+                await viewButton.click()
+
+                const deleteButton = createdBlog.getByText('Delete')
+                expect(deleteButton).toBeVisible()
+                page.on('dialog', (dialog) => dialog.accept())
+                await deleteButton.click()
+
+                
+                await expect(page.locator('.blog')).not.toBeVisible()
             })
         })
     })
