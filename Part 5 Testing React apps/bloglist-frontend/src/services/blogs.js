@@ -57,7 +57,6 @@ const updateBlog = async (blog) => {
     blog,
     headers
   )
-
   return response.data
 }
 
