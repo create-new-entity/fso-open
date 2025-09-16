@@ -123,8 +123,28 @@ describe('Blog app', () => {
                 page.on('dialog', (dialog) => dialog.accept())
                 await deleteButton.click()
 
-                
                 await expect(page.locator('.blog')).not.toBeVisible()
+            })
+
+            test('Delete button is not visible for a non creator.', async ({ page }) => {
+                await testUtils.createABlog(page, testBlog)
+                let createdBlog = page.locator('.blog').nth(0)
+                let viewButton = createdBlog.getByText('View')
+                await expect(viewButton).toBeVisible()
+                await viewButton.click()
+                let deleteButton = createdBlog.getByText('Delete')
+                expect(deleteButton).toBeVisible()
+
+                const logoutButton = page.getByText('Logout')
+                await logoutButton.click()
+
+                await testUtils.login(page, testUser2)
+                createdBlog = page.locator('.blog').nth(0)
+                viewButton = createdBlog.getByText('View')
+                await expect(viewButton).toBeVisible()
+                await viewButton.click()
+                deleteButton = createdBlog.getByText('Delete')
+                expect(deleteButton).not.toBeVisible()
             })
         })
     })
