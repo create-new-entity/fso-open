@@ -24,7 +24,7 @@
         </ul>
     </li>
     <li>
-        End to end testing: Playwright and End to end testing: Cypress
+        End to end testing: **Playwright**
         <ul>
             <li>
                 Exercises 5.17 - 5.23
