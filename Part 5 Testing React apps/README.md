@@ -1,5 +1,6 @@
 
 ### [Part 5](https://fullstackopen.com/en/part5) contents:
+All Part 5 exercises commits are [here](https://github.com/create-new-entity/fso-open/commits/development/Part%205%20Testing%20React%20apps)
 
 <ol>
     <li>Login in frontend
