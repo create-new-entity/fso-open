@@ -146,6 +146,37 @@ describe('Blog app', () => {
                 deleteButton = createdBlog.getByText('Delete')
                 expect(deleteButton).not.toBeVisible()
             })
+
+            test('Blogs are sorted properly.', async ({ page }) => {
+                await testUtils.createABlog(page, testBlog)
+                await testUtils.createABlog(page, testBlog2)
+
+                let firstBlog = page.locator('.blog').nth(0)
+                let viewButton = firstBlog.getByText('View')
+                await expect(viewButton).toBeVisible()
+                await viewButton.click()
+
+                let secondBlog = page.locator('.blog').nth(1)
+                viewButton = secondBlog.getByText('View')
+                await expect(viewButton).toBeVisible()
+                await viewButton.click()
+
+                await expect(firstBlog).toBeVisible()
+                await expect(secondBlog).toBeVisible()
+
+                let likeButton = secondBlog.getByText('Like')
+                await likeButton.click()
+                await expect(page.locator('.blog-likes').nth(0)).toHaveText('1')
+                
+                firstBlog = page.locator('.blog').nth(0)
+                likeButton = firstBlog.getByText('Like')
+                await likeButton.click()
+                await expect(page.locator('.blog-likes').nth(0)).toHaveText('2')
+
+                await likeButton.click()
+                await expect(page.locator('.blog-likes').nth(0)).toHaveText('3')
+                await expect(page.locator('.blog-likes').nth(1)).toHaveText('0')
+            })
         })
     })
 })
