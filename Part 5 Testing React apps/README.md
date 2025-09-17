@@ -25,7 +25,7 @@ All Part 5 exercises commits are [here](https://github.com/create-new-entity/fso
         </ul>
     </li>
     <li>
-        End to end testing: Playwright and End to end testing: Cypress
+        End to end testing: Playwright
         <ul>
             <li>
                 Exercises 5.17 - 5.23
