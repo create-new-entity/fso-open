@@ -49,7 +49,7 @@ const anecdoteReducer = (state = initialState, action) => {
   return state
 }
 
-export const vote = (anecdoteId) => {
+export const vote = (anecdoteId) => { // 6.6
   return {
     type: 'VOTE',
     payload: {
@@ -58,7 +58,7 @@ export const vote = (anecdoteId) => {
   }
 }
 
-export const createNewAnecdote = (anecdote) => {
+export const createNewAnecdote = (anecdote) => { // 6.6
   return {
     type: 'NEW_ANECDOTE',
     payload: {
