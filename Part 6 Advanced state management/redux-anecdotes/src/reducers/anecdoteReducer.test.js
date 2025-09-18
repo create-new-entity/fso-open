@@ -1,5 +1,5 @@
 import deepFreeze from "deep-freeze";
-import anecdoteReducer, { vote } from "./anecdoteReducer";
+import anecdoteReducer, { vote, createNewAnecdote } from "./anecdoteReducer";
 
 const testAnecdote = {
     content: 'Test1',
@@ -10,7 +10,7 @@ const testAnecdote = {
 
 
 describe('anecdoteReducer tests.', () => {
-    test('Voting works', () => {
+    test('Voting works.', () => {
         const initialAnecdotes = [testAnecdote]
         deepFreeze(initialAnecdotes)
         const voteAction = vote(testAnecdote.id)
@@ -18,5 +18,15 @@ describe('anecdoteReducer tests.', () => {
 
         expect(newState).toHaveLength(1)
         expect(newState[0].votes).toBe(1)
+    })
+
+    test('New note creation works.', () => {
+        const initialAnecdotes = []
+        deepFreeze(initialAnecdotes)
+        const createNewAnecdoteAction = createNewAnecdote(testAnecdote.content)
+        const newState = anecdoteReducer(initialAnecdotes, createNewAnecdoteAction)
+        
+        expect(newState.length).toBe(initialAnecdotes.length + 1)
+        expect(newState[0].content).toBe(testAnecdote.content)
     })
 })
