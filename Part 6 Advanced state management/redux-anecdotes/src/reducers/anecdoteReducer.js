@@ -17,7 +17,12 @@ const asObject = (anecdote) => {
   }
 }
 
-const initialState = anecdotesAtStart.map(asObject)
+const initialAnecdotes = anecdotesAtStart.map(asObject)
+const initialState = {
+  allAnecdotes: initialAnecdotes,
+  filteredAnecdotes: initialAnecdotes.map(a => a.id)
+}
+
 const sortAnecdotes = (a, b) => b.votes - a.votes
 
 const anecdoteReducer = (state = initialState, action) => {
@@ -41,12 +46,17 @@ const anecdoteReducer = (state = initialState, action) => {
         id: getId()
       }
       return state.concat(newNote)
+    case 'FILTER':
+      return {
+        allAnecdotes: state.allAnecdotes,
+        filteredAnecdotes: state.allAnecdotes.filter((anecdote) => {
+          return anecdote.content.includes(action.payload.filter)
+        }).map((anecdote) => anecdote.id)
+      }
 
     default:
       return state
   }
-
-  return state
 }
 
 export const vote = (anecdoteId) => { // 6.6
