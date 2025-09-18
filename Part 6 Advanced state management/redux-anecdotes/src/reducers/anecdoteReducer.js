@@ -18,6 +18,7 @@ const asObject = (anecdote) => {
 }
 
 const initialState = anecdotesAtStart.map(asObject)
+const sortAnecdotes = (a, b) => b.votes - a.votes
 
 const anecdoteReducer = (state = initialState, action) => {
 
@@ -32,7 +33,7 @@ const anecdoteReducer = (state = initialState, action) => {
         const newAnecdote = { ...anecdote }
         newAnecdote.votes++
         return newAnecdote
-      })
+      }).sort(sortAnecdotes)
     
     case 'NEW_ANECDOTE':
       const newNote = {

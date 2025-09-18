@@ -7,6 +7,12 @@ const testAnecdote = {
     votes: 0
 }
 
+const testAnecdote2 = {
+    content: 'Test2',
+    id: 2,
+    votes: 0
+}
+
 
 
 describe('anecdoteReducer tests.', () => {
@@ -28,5 +34,13 @@ describe('anecdoteReducer tests.', () => {
         
         expect(newState.length).toBe(initialAnecdotes.length + 1)
         expect(newState[0].content).toBe(testAnecdote.content)
+    })
+
+    test('Anecdotes are ordered by votes', () => {
+        const initialAnecdotes = [testAnecdote, testAnecdote2]
+        deepFreeze(initialAnecdotes)
+        const voteAction = vote(testAnecdote2.id)
+        const newState = anecdoteReducer(initialAnecdotes, voteAction)
+        expect(newState[0].content).toBe(testAnecdote2.content)
     })
 })
