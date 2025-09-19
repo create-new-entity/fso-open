@@ -1,5 +1,5 @@
 import deepFreeze from "deep-freeze";
-import anecdoteReducer, { vote, createNewAnecdote } from "./anecdoteReducer";
+import anecdoteReducer, { vote, createNewAnecdote } from "./anecdoteSlice";
 
 const testAnecdote = {
     content: 'Test1',

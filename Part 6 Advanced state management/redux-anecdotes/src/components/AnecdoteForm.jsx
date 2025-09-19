@@ -7,8 +7,10 @@ const AnecdoteForm = (props) => {
     const handleNewAnecdote = (e) => {
         e.preventDefault()
         const newAnecdote = e.target.anecdote.value
+        if(newAnecdote && newAnecdote.length) {
+            dispatch(createNewAnecdote(newAnecdote))
+        }
         e.target.anecdote.value = ''
-        dispatch(createNewAnecdote(newAnecdote))
     }
 
     return (

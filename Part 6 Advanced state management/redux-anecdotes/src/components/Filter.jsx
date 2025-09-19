@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux"
-import { changeFilter } from "../reducers/filterReducer"
+import { filter } from "../reducers/filterReducer"
 
 
 const Filter = () => {
     const dispatch = useDispatch()
 
     const handleInputChange = (e) => {
-        dispatch(changeFilter(e.target.value))
+        dispatch(filter(e.target.value))
     }
     
     return (
