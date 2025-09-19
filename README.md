@@ -3,6 +3,7 @@
 **Contents**
 - [Part 0 Fundamentals of Web apps](#part-0-fundamentals-of-web-apps-contents)
 - [Part 1 Introduction to React](#part-1-introduction-to-react-contents)
+- [Part 2 Communicating with server](#part-2-communicating-with-server-contents)
 - [Part 5 Testing React Apps](#part-5-testing-react-apps-contents)
 - [Part 6 Advanced State Management](#part-6-advanced-state-management-contents)
 
@@ -65,6 +66,56 @@ All Part 1 exercises commits are [here](https://github.com/create-new-entity/fso
 </ol>
 
 **Keywords: JSX, Props Passing, JS Fundamentals, Event Handling, State Management**
+
+---
+
+### [Part 2 Communicating with server](https://fullstackopen.com/en/part2) Contents:
+All Part 2 exercises commits are [here](https://github.com/create-new-entity/fso-open/compare/c668d31%5E...7d8ef6f)
+
+<ol>
+    <li>
+        Rendering a collection, modules
+        <ul>
+            <li>
+                Exercises 2.1 - 2.5
+            </li>
+        </ul>
+    </li>
+    <li>
+        Forms
+        <ul>
+            <li>
+                Exercises 2.6 - 2.10
+            </li>
+        </ul>
+    </li>
+    <li>
+        Getting data from server
+        <ul>
+            <li>
+                Exercises 2.11
+            </li>
+        </ul>
+    </li>
+    <li>
+        Altering data in server
+        <ul>
+            <li>
+                Exercises 2.12 - 2.15
+            </li>
+        </ul>
+    </li>
+    <li>
+        Adding styles to React app
+        <ul>
+            <li>
+                Exercises 2.16 - 2.20
+            </li>
+        </ul>
+    </li>
+</ol>
+
+**Keywords: Forms, Controlled Components, Axios, Promises, REST**
 
 ---
 
