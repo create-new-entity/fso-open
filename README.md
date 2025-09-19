@@ -27,7 +27,7 @@ All Part 0 exercises commits are [here](https://github.com/create-new-entity/fso
     </li>
 </ol>
 
-**Keywords: DOM, CSS, Ajax, SPA, Forms, HTTP POST**
+**Keywords: DOM, CSS, Ajax, SPA, Forms, HTTP POST.**
 
 ---
 
@@ -65,7 +65,7 @@ All Part 1 exercises commits are [here](https://github.com/create-new-entity/fso
     </li>
 </ol>
 
-**Keywords: JSX, Props Passing, JS Fundamentals, Event Handling, State Management**
+**Keywords: JSX, Props Passing, JS Fundamentals, Event Handling, State Management.**
 
 ---
 
@@ -115,7 +115,7 @@ All Part 2 exercises commits are [here](https://github.com/create-new-entity/fso
     </li>
 </ol>
 
-**Keywords: Forms, Controlled Components, Axios, Promises, REST**
+**Keywords: Forms, Controlled Components, Axios, Promises, REST.**
 
 ---
 
@@ -154,7 +154,7 @@ All Part 5 exercises commits are [here](https://github.com/create-new-entity/fso
     </li>
 </ol>
 
-**Keywords: React Testing Library, Unit Testing,  End To End Testing ( Playwright )**
+**Keywords: React Testing Library, Unit Testing,  End To End Testing ( Playwright ).**
 
 ---
 
