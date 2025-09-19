@@ -9,7 +9,7 @@
 
 ### [Part 0 Fundamentals of Web apps](https://fullstackopen.com/en/part0) Contents:
 
-All Part 0 exercises commits are [here](https://github.com/create-new-entity/fso-open/commits/development/Part%200%20Fundamentals%20of%20Web%20apps)
+All Part 0 exercises commits are [here](https://github.com/create-new-entity/fso-open/tree/development/Part%200%20Fundamentals%20of%20Web%20apps)
 
 <ol>
     <li>
