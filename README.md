@@ -1,8 +1,8 @@
 # [Full Stack Open](https://fullstackopen.com/en/)
 
 **Contents**
-- [Part 0 Fundamentals of Web apps](#part-5-testing-react-apps-contents)
-- [Part 1 Introduction to React]
+- [Part 0 Fundamentals of Web apps](#part-0-fundamentals-of-web-apps-contents)
+- [Part 1 Introduction to React](#part-1-introduction-to-react-contents)
 - [Part 5 Testing React Apps](#part-5-testing-react-apps-contents)
 - [Part 6 Advanced State Management](#part-6-advanced-state-management-contents)
 
@@ -26,11 +26,45 @@ All Part 0 exercises commits are [here](https://github.com/create-new-entity/fso
     </li>
 </ol>
 
-**Keywords: DOM, CSS, AJAX, SPA, FORMS, HTTP POST**
+**Keywords: DOM, CSS, Ajax, SPA, Forms, HTTP POST**
 
 ---
 
 ### [Part 1 Introduction to React](https://fullstackopen.com/en/part1) Contents:
+
+All Part 1 exercises commits are [here](https://github.com/create-new-entity/fso-open/compare/bbab25d%5E...f55051a)
+
+<ol>
+    <li>
+        Introduction to React
+        <ul>
+            <li>
+                Exercises 1.1 - 1.2
+            </li>
+        </ul>
+    </li>
+    <li>
+        JavaScript
+        <ul>
+            <li>
+                Exercises 1.3 - 1.5
+            </li>
+        </ul>
+    </li>
+    <li>
+        Component state, event handlers
+    </li>
+    <li>
+        A more complex state, debugging React apps
+        <ul>
+            <li>
+                Exercises 1.6 - 1.14
+            </li>
+        </ul>
+    </li>
+</ol>
+
+**Keywords: JSX, Props Passing, JS Fundamentals, Event Handling, State Management**
 
 ---
 
