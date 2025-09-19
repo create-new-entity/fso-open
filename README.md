@@ -1,5 +1,9 @@
 # [Full Stack Open](https://fullstackopen.com/en/)
 
+### Contents
+[Part 5 Testing React Apps](#part-5-testing-react-apps-contents)
+[Part 6 Advanced State Management](#part-6-advanced-state-management-contents)
+
 ---
 
 ### [Part 5 Testing React Apps](https://fullstackopen.com/en/part5) Contents:
@@ -37,7 +41,7 @@ All Part 5 exercises commits are [here](https://github.com/create-new-entity/fso
     </li>
 </ol>
 
-Keywords: React Testing Library, Unit Testing,  End To End Testing ( Playwright )
+***Keywords: React Testing Library, Unit Testing,  End To End Testing ( Playwright )***
 
 ---
 
@@ -78,6 +82,6 @@ All Part 6 exercises commits are [here](https://github.com/create-new-entity/fso
     </li>
 </ol>
 
-Keywords: React, Redux, Redux Toolkit.
+***Keywords: React, Redux, Redux Toolkit.***
 
 ---
