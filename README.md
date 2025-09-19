@@ -1,8 +1,31 @@
 # [Full Stack Open](https://fullstackopen.com/en/)
 
 **Contents**
+- [Part 0 Fundamentals of Web apps](#part-5-testing-react-apps-contents)
 - [Part 5 Testing React Apps](#part-5-testing-react-apps-contents)
 - [Part 6 Advanced State Management](#part-6-advanced-state-management-contents)
+
+---
+
+### [Part 0 Fundamentals of Web apps](https://fullstackopen.com/en/part0) Contents:
+
+All Part 0 exercises commits are [here](https://github.com/create-new-entity/fso-open/commits/development/Part%200%20Fundamentals%20of%20Web%20apps)
+
+<ol>
+    <li>
+        General Info
+    </li>
+    <li>
+        Fundamentals of Web apps
+        <ul>
+            <li>
+                Exercises 0.1 - 0.6
+            </li>
+        </ul>
+    </li>
+</ol>
+
+**Keywords: DOM, CSS, AJAX, SPA, FORMS, HTTP POST**
 
 ---
 
