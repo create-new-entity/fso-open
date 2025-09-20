@@ -23,7 +23,7 @@ const initialState = anecdotesAtStart.map(asObject)
 const sortAnecdotes = (a, b) => b.votes - a.votes
 
 
-const anecdoteSlice = createSlice({
+const anecdoteSlice = createSlice({ // 6.11
   name: 'anecdote',
   initialState,
   reducers: {
