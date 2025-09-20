@@ -4,6 +4,7 @@
 - [Part 0 Fundamentals of Web apps](#part-0-fundamentals-of-web-apps-contents)
 - [Part 1 Introduction to React](#part-1-introduction-to-react-contents)
 - [Part 2 Communicating with server](#part-2-communicating-with-server-contents)
+- [Part 3 Programming a server with NodeJS and Express](#part-3-programming-a-server-with-nodejs-and-express)
 - [Part 5 Testing React Apps](#part-5-testing-react-apps-contents)
 - [Part 6 Advanced State Management](#part-6-advanced-state-management-contents)
 
@@ -116,6 +117,46 @@ All Part 2 exercises commits are [here](https://github.com/create-new-entity/fso
 </ol>
 
 **Keywords: Forms, Controlled Components, Axios, Promises, REST.**
+
+---
+
+### [Part 3 Programming a server with NodeJS and Express](https://fullstackopen.com/en/part3)
+All Part 3 exercises commits are [here](https://github.com/create-new-entity/fso-open/compare/eb597c5%5E...d93cfaa). Some of them are not code changes, rather infra tasks ( e.g. Deploy X on Y and so on ). Hence not in the repo.
+
+<ol>
+    <li>
+        Node.js and Express
+        <ul>
+            <li>Exercises 3.1 - 3.8</li>
+        </ul>
+    </li>
+    <li>
+        Deploying app to internet
+        <ul>
+            <li>
+                Exercises 3.9 - 3.11
+            </li>
+        </ul>
+    </li>
+    <li>
+        Saving data to MongoDB
+        <ul>
+            <li>
+                Exercises 3.12 - 3.18
+            </li>
+        </ul>
+    </li>
+    <li>
+        Validation and ESLint
+        <ul>
+            <li>
+                Exercises 3.19 - 3.22
+            </li>
+        </ul>
+    </li>
+</ol>
+
+**Keywords: Node.js, Express, Postman, VSCode Rest Client, Middleware, Deployment, MongoDB, ESLint.**
 
 ---
 
