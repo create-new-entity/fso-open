@@ -5,6 +5,7 @@
 - [Part 1 Introduction to React](#part-1-introduction-to-react-contents)
 - [Part 2 Communicating with server](#part-2-communicating-with-server-contents)
 - [Part 3 Programming a server with NodeJS and Express](#part-3-programming-a-server-with-nodejs-and-express)
+- [Part 4 Testing Express servers, user administration](#part-4-testing-express-servers-user-administration-contents)
 - [Part 5 Testing React Apps](#part-5-testing-react-apps-contents)
 - [Part 6 Advanced State Management](#part-6-advanced-state-management-contents)
 
@@ -157,6 +158,41 @@ All Part 3 exercises commits are [here](https://github.com/create-new-entity/fso
 </ol>
 
 **Keywords: Node.js, Express, Postman, VSCode Rest Client, Middleware, Deployment, MongoDB, ESLint.**
+
+---
+
+### [Part 4 Testing Express servers, user administration](https://fullstackopen.com/en/part4) Contents:
+All Part 4 exercises commits are [here](https://github.com/create-new-entity/fso-open/compare/3f215d3%5E...4aab450)
+
+<ol>
+    <li>
+        Structure of backend application, introduction to testing
+        <ul>
+            <li>Exercises 4.1 - 4.7</li>
+        </ul>
+    </li>
+    <li>
+        Testing the backend
+        <ul>
+            <li>
+                Exercises 4.8 - 4.14
+            </li>
+        </ul>
+    </li>
+    <li>
+        User administration
+    </li>
+    <li>
+        Token authentication
+        <ul>
+            <li>
+                Exercises 4.15 - 4.23
+            </li>
+        </ul>
+    </li>
+</ol>
+
+**Keywords: node:test, supertest, async/await, Routing, Authentication.**
 
 ---
 
