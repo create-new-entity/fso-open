@@ -243,7 +243,7 @@ All Part 5 exercises commits are [here](https://github.com/create-new-entity/fso
 ---
 
 ### [Part 6 Advanced State Management](https://fullstackopen.com/en/part6) Contents:
-All Part 6 exercises commits are [here](https://github.com/create-new-entity/fso-open/commits/development/Part%206%20Advanced%20state%20management)
+All Part 6 exercises commits are [here](https://github.com/create-new-entity/fso-open/compare/2417134%5E...505e616)
 <ol>
     <li>
         Flux-architecture and Redux
