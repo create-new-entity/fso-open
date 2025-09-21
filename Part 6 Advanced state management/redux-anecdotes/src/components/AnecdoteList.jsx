@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { createSelector } from "@reduxjs/toolkit"
-import { vote, setAnecdotes } from "../reducers/anecdoteReducer"
+import { vote, setAnecdotes, initializeAnecdotes } from "../reducers/anecdoteReducer"
 import { useEffect } from "react"
 import anecdotesServices from "../services/anecdotes"
 
@@ -36,10 +36,7 @@ const AnecdoteList = () => {
     }
 
     useEffect(() => {
-        (async () => {
-            const initialAnecdotes = await anecdotesServices.getAllAnecdotes()
-            dispatch(setAnecdotes(initialAnecdotes))
-        })()
+        dispatch(initializeAnecdotes())
     }, [])
 
     return (
