@@ -33,7 +33,7 @@
     {
       "id": "01ce",
       "content": "Test anecdote",
-      "votes": 20
+      "votes": 25
     },
     {
       "id": "1073",
@@ -48,12 +48,17 @@
     {
       "id": "2563",
       "content": "Test2",
-      "votes": 23
+      "votes": 24
     },
     {
       "id": "f031",
       "content": "sdf",
       "votes": 2
+    },
+    {
+      "id": "1e13",
+      "content": "Test again again",
+      "votes": 0
     }
   ]
 }

@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux"
 import { saveNewAnecdote } from "../reducers/anecdoteReducer"
-import { getCreateNoteNotificationMsg, hideNotification, showNotification } from "../reducers/notificationReducer"
+import { getCreateNoteNotificationMsg, setNotification } from "../reducers/notificationReducer"
 
 const NOTIFICATION_DELAY = 5000
 
@@ -16,10 +16,7 @@ const AnecdoteForm = (props) => {
                 votes: 0
             }
             dispatch(saveNewAnecdote(payload))
-            dispatch(showNotification(getCreateNoteNotificationMsg(newAnecdote)))
-            setTimeout(() => {
-                dispatch(hideNotification(''))
-            }, NOTIFICATION_DELAY)
+            dispatch(setNotification(getCreateNoteNotificationMsg(newAnecdote), NOTIFICATION_DELAY))
         }
         e.target.anecdote.value = ''
     }
