@@ -279,6 +279,6 @@ All Part 6 exercises commits are [here](https://github.com/create-new-entity/fso
     </li>
 </ol>
 
-**Keywords: React, Redux, Redux Toolkit.**
+**Keywords: React, Redux, Redux Thunk, Redux Toolkit, useReducer, Context API, React Query.**
 
 ---
