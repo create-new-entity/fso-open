@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { createSelector } from "@reduxjs/toolkit"
-import { vote, setAnecdotes, initializeAnecdotes } from "../reducers/anecdoteReducer"
+import { initializeAnecdotes, updateAnecdote } from "../reducers/anecdoteReducer"
 import { useEffect } from "react"
-import anecdotesServices from "../services/anecdotes"
 
 const selectFilteredItems = createSelector(
     [
@@ -23,16 +22,13 @@ const AnecdoteList = () => {
     const dispatch = useDispatch()
     
     const anecdotes = useSelector(selectFilteredItems)
-    const handleVote = async (id) => {
-
+    const handleVote = (id) => {
         const foundAnecdote = anecdotes.find((a) => a.id === id)
         if(foundAnecdote) {
             const candidate = { ...foundAnecdote }
             candidate.votes++
-            const updatedAnecdote = await anecdotesServices.updateAnecdote(candidate)
-            dispatch(vote(id))
+            dispatch(updateAnecdote(candidate))
         }
-        
     }
 
     useEffect(() => {
