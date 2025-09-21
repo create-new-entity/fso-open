@@ -129,7 +129,7 @@ All Part 2 exercises commits are [here](https://github.com/create-new-entity/fso
 ---
 
 ### [Part 3 Programming a server with NodeJS and Express](https://fullstackopen.com/en/part3)
-All Part 3 exercises commits are [here](https://github.com/create-new-entity/fso-open/compare/eb597c5%5E...d93cfaa) and [here](https://github.com/create-new-entity/fso-open-part3-backend/commits/development/).
+All Part 3 exercises commits are [here](https://github.com/create-new-entity/fso-open/compare/eb597c5%5E...d93cfaa) and [here](https://github.com/create-new-entity/fso-open-part3-backend/compare/9cf306c%5E...31cd00b).
 
 <ol>
     <li>
