@@ -14,6 +14,9 @@ const AnecdoteForm = () => {
       const anecdotes = queryClient.getQueryData(['anecdotes'])
       queryClient.setQueryData(['anecdotes'], anecdotes.concat(newAnecdote))
       handleNotification(`Created ${newAnecdote.content}`, dispatchNotification)
+    },
+    onError: (failedReq) => {
+      handleNotification(failedReq.response.data.error, dispatchNotification)
     }
   })
 
