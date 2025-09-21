@@ -27,10 +27,18 @@ const anecdoteSlice = createSlice({ // 6.11
   }
 })
 
+
 export const initializeAnecdotes = () => {
   return async (dispatch) => {
     const anecdotes = await anecdotesServices.getAllAnecdotes()
     dispatch(setAnecdotes(anecdotes))
+  }
+}
+
+export const saveNewAnecdote = (newAnecdote) => {
+  return async (dispatch) => {
+    const savedAnecdote = await anecdotesServices.createAnecdote(newAnecdote)
+    dispatch(createNewAnecdote(savedAnecdote))
   }
 }
 
