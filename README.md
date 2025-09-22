@@ -7,7 +7,7 @@ Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This cou
 
 ---
 
-**Contents**
+### [Contents]()
 - [Part 0 Fundamentals of Web apps](#part-0-fundamentals-of-web-apps-contents)
 - [Part 1 Introduction to React](#part-1-introduction-to-react-contents)
 - [Part 2 Communicating with server](#part-2-communicating-with-server-contents)
@@ -38,6 +38,8 @@ All Part 0 exercises commits are [here](https://github.com/create-new-entity/fso
 </ol>
 
 **Keywords: DOM, CSS, Ajax, SPA, Forms, HTTP POST.**
+
+###### Go back to [Contents](#contents)
 
 ---
 
@@ -76,6 +78,8 @@ All Part 1 exercises commits are [here](https://github.com/create-new-entity/fso
 </ol>
 
 **Keywords: JSX, Props Passing, JS Fundamentals, Event Handling, State Management.**
+
+###### Go back to [Contents](#contents)
 
 ---
 
@@ -127,6 +131,8 @@ All Part 2 exercises commits are [here](https://github.com/create-new-entity/fso
 
 **Keywords: Forms, Controlled Components, Axios, Promises, REST.**
 
+###### Go back to [Contents](#contents)
+
 ---
 
 ### [Part 3 Programming a server with NodeJS and Express](https://fullstackopen.com/en/part3)
@@ -167,6 +173,8 @@ All Part 3 exercises commits are [here](https://github.com/create-new-entity/fso
 
 **Keywords: Node.js, Express, Postman, VSCode Rest Client, Middleware, Deployment, MongoDB, ESLint.**
 
+###### Go back to [Contents](#contents)
+
 ---
 
 ### [Part 4 Testing Express servers, user administration](https://fullstackopen.com/en/part4) Contents:
@@ -201,6 +209,8 @@ All Part 4 exercises commits are [here](https://github.com/create-new-entity/fso
 </ol>
 
 **Keywords: node:test, supertest, async/await, Routing, Authentication.**
+
+###### Go back to [Contents](#contents)
 
 ---
 
@@ -240,6 +250,8 @@ All Part 5 exercises commits are [here](https://github.com/create-new-entity/fso
 </ol>
 
 **Keywords: React Testing Library, Unit Testing,  End To End Testing ( Playwright ).**
+
+###### Go back to [Contents](#contents)
 
 ---
 
@@ -282,6 +294,8 @@ All Part 6 exercises commits are [here](https://github.com/create-new-entity/fso
 </ol>
 
 **Keywords: React, Redux, Redux Thunk, Redux Toolkit, useReducer, Context API, React Query.**
+
+###### Go back to [Contents](#contents)
 
 ---
 
@@ -326,4 +340,5 @@ All Part 7 exercises commits are [here]()
 
 **Keywords: React Router, Webpack, Styling.**
 
+###### Go back to [Contents](#contents)
 ---
