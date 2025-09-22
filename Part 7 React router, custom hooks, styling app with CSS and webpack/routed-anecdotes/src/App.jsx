@@ -37,7 +37,10 @@ const Footer = () => (
   </footer>
 )
 
+const NOTIFICATION_DELAY = 5000
+
 const CreateNew = (props) => {
+  const { setNotification } = props
   const [content, setContent] = useState('')
   const [author, setAuthor] = useState('')
   const [info, setInfo] = useState('')
@@ -51,6 +54,10 @@ const CreateNew = (props) => {
       info,
       votes: 0
     })
+    setNotification(`Created ${content}`)
+    setTimeout(() => {
+      setNotification('')
+    }, NOTIFICATION_DELAY)
   }
 
   return (
@@ -104,6 +111,20 @@ const Anecdote = (props) => {
   )
 }
 
+const Notification = ({ message }) => {
+  const style = {
+    border: 'solid',
+    padding: 10,
+    borderWidth: 1,
+    marginBottom: 5
+  }
+
+  return (
+    <div style={style}>
+      { message }
+    </div>
+  )
+}
 
 const App = () => {
   const navigate = useNavigate()
@@ -155,8 +176,11 @@ const App = () => {
     <div>
       <h1>Software anecdotes</h1>
       <Menu />
+      {
+        notification && <Notification message={notification}/>
+      }
       <Routes>
-        <Route path='/new' element={<CreateNew addNew={addNew} />}/>
+        <Route path='/new' element={<CreateNew addNew={addNew} setNotification={setNotification}/>}/>
         <Route path='/about' element={<About />}/>
         <Route path={`/anecdotes/${match?.params.id}`} element={<Anecdote anecdote={anecdote}/>}/>
         <Route path='/' element={<AnecdoteList anecdotes={anecdotes} />}/>
