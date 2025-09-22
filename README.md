@@ -19,7 +19,8 @@ Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This cou
 
 ---
 
-### [Part 0 Fundamentals of Web apps](https://fullstackopen.com/en/part0) Contents:
+### Part 0 Fundamentals of Web apps Contents:
+##### [Course Page](https://fullstackopen.com/en/part0)
 
 All Part 0 exercises commits are [here](https://github.com/create-new-entity/fso-open/commit/ace915b1fbbf38d887da25773958943c173a87cd)
 
@@ -43,7 +44,8 @@ All Part 0 exercises commits are [here](https://github.com/create-new-entity/fso
 
 ---
 
-### [Part 1 Introduction to React](https://fullstackopen.com/en/part1) Contents:
+### Part 1 Introduction to React Contents:
+##### [Course Page](https://fullstackopen.com/en/part1)
 
 All Part 1 exercises commits are [here](https://github.com/create-new-entity/fso-open/compare/bbab25d%5E...f55051a)
 
@@ -83,7 +85,9 @@ All Part 1 exercises commits are [here](https://github.com/create-new-entity/fso
 
 ---
 
-### [Part 2 Communicating with server](https://fullstackopen.com/en/part2) Contents:
+### Part 2 Communicating with server Contents:
+##### [Course Page](https://fullstackopen.com/en/part2)
+
 All Part 2 exercises commits are [here](https://github.com/create-new-entity/fso-open/compare/c668d31%5E...7d8ef6f)
 
 <ol>
@@ -135,7 +139,9 @@ All Part 2 exercises commits are [here](https://github.com/create-new-entity/fso
 
 ---
 
-### [Part 3 Programming a server with NodeJS and Express](https://fullstackopen.com/en/part3)
+### Part 3 Programming a server with NodeJS and Express
+##### [Course Page](https://fullstackopen.com/en/part3)
+
 All Part 3 exercises commits are [here](https://github.com/create-new-entity/fso-open/compare/eb597c5%5E...d93cfaa) and [here](https://github.com/create-new-entity/fso-open-part3-backend/compare/9cf306c%5E...31cd00b).
 
 <ol>
@@ -177,7 +183,9 @@ All Part 3 exercises commits are [here](https://github.com/create-new-entity/fso
 
 ---
 
-### [Part 4 Testing Express servers, user administration](https://fullstackopen.com/en/part4) Contents:
+### Part 4 Testing Express servers, user administration Contents:
+##### [Course Page](https://fullstackopen.com/en/part4)
+
 All Part 4 exercises commits are [here](https://github.com/create-new-entity/fso-open/compare/3f215d3%5E...4aab450)
 
 <ol>
@@ -214,7 +222,9 @@ All Part 4 exercises commits are [here](https://github.com/create-new-entity/fso
 
 ---
 
-### [Part 5 Testing React Apps](https://fullstackopen.com/en/part5) Contents:
+### Part 5 Testing React Apps Contents:
+##### [Course Page](https://fullstackopen.com/en/part5)
+
 All Part 5 exercises commits are [here](https://github.com/create-new-entity/fso-open/compare/9efb625%5E...994df47)
 
 <ol>
@@ -255,9 +265,11 @@ All Part 5 exercises commits are [here](https://github.com/create-new-entity/fso
 
 ---
 
-### [Part 6 Advanced State Management](https://fullstackopen.com/en/part6) Contents:
+### Part 6 Advanced State Management Contents:
+##### [Course Page](https://fullstackopen.com/en/part6)
 
 All Part 6 exercises commits are [here](https://github.com/create-new-entity/fso-open/compare/2417134%5E...505e616)
+
 <ol>
     <li>
         Flux-architecture and Redux
@@ -299,9 +311,11 @@ All Part 6 exercises commits are [here](https://github.com/create-new-entity/fso
 
 ---
 
-### [Part 7 React router, custom hooks, styling app with CSS and webpack](https://fullstackopen.com/en/part7) Contents:
+### Part 7 React router, custom hooks, styling app with CSS and webpack Contents:
+##### [Course Page](https://fullstackopen.com/en/part7)
 
 All Part 7 exercises commits are [here]()
+
 <ol>
     <li>
         React Router
