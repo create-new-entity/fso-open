@@ -15,6 +15,7 @@ Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This cou
 - [Part 4 Testing Express servers, user administration](#part-4-testing-express-servers-user-administration-contents)
 - [Part 5 Testing React Apps](#part-5-testing-react-apps-contents)
 - [Part 6 Advanced State Management](#part-6-advanced-state-management-contents)
+- [Part 7 React router, custom hooks, styling app with CSS and webpack](#part-7-react-router-custom-hooks-styling-app-with-css-and-webpack-contents)
 
 ---
 
@@ -243,6 +244,7 @@ All Part 5 exercises commits are [here](https://github.com/create-new-entity/fso
 ---
 
 ### [Part 6 Advanced State Management](https://fullstackopen.com/en/part6) Contents:
+
 All Part 6 exercises commits are [here](https://github.com/create-new-entity/fso-open/compare/2417134%5E...505e616)
 <ol>
     <li>
@@ -280,5 +282,48 @@ All Part 6 exercises commits are [here](https://github.com/create-new-entity/fso
 </ol>
 
 **Keywords: React, Redux, Redux Thunk, Redux Toolkit, useReducer, Context API, React Query.**
+
+---
+
+### [Part 7 React router, custom hooks, styling app with CSS and webpack](https://fullstackopen.com/en/part7) Contents:
+
+All Part 7 exercises commits are [here]()
+<ol>
+    <li>
+        React Router
+        <ul>
+            <li>
+                Exercises 7.1 - 7.3
+            </li>
+        </ul>
+    </li>
+    <li>
+        Custom hooks
+        <ul>
+            <li>
+                Exercises 7.4 - 7.8
+            </li>
+        </ul>
+    </li>
+    <li>
+        More about styles
+    </li>
+    <li>
+        Webpack
+    </li>
+    <li>
+        Class components, Miscellaneous
+    </li>
+    <li>
+        Exercises: extending the bloglist
+        <ul>
+            <li>
+                Exercises 7.9 - 7.21
+            </li>
+        </ul>
+    </li>
+</ol>
+
+**Keywords: React Router, Webpack, Styling.**
 
 ---
