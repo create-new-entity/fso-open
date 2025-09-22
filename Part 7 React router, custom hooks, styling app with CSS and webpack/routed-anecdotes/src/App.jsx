@@ -51,12 +51,12 @@ const CreateNew = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     props.addNew({
-      content: contentField.value,
-      author: authorField.value,
-      info: infoField.value,
+      content: contentField.inputProps.value,
+      author: authorField.inputProps.value,
+      info: infoField.inputProps.value,
       votes: 0
     })
-    setNotification(`Created ${contentField.value}`)
+    setNotification(`Created ${contentField.inputProps.value}`)
     setTimeout(() => {
       setNotification('')
     }, NOTIFICATION_DELAY)
@@ -68,17 +68,22 @@ const CreateNew = (props) => {
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input {...contentField}/>
+          <input {...contentField.inputProps}/>
         </div>
         <div>
           author
-          <input {...authorField}/>
+          <input {...authorField.inputProps}/>
         </div>
         <div>
           url for more info
-          <input {...infoField}/>
+          <input {...infoField.inputProps}/>
         </div>
-        <button>create</button>
+        <button type='submit'>create</button>
+        <button type='reset' onClick={() => {
+          contentField.reset()
+          authorField.reset()
+          infoField.reset()
+        }}>reset</button>
       </form>
     </div>
   )
