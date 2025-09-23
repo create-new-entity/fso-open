@@ -7,6 +7,7 @@ import Togglable from './components/Togglable'
 import { handleNotification } from './utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { notificationSelector } from './reducers/notificationReducer'
+import { blogsSelector, createNewBlog, initializeBlogs } from './reducers/blogsReducer'
 
 const LOGGED_IN_USER = 'loggedInUser'
 
@@ -74,20 +75,15 @@ const Login = (props) => {
 }
 
 const App = () => {
-  const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
   const dispatch = useDispatch()
   const notification = useSelector(notificationSelector)
+  const blogs = useSelector(blogsSelector)
   const togglableRef = useRef()
 
   useEffect(() => {
-    blogService.getAll().then((blogs) => {
-      blogs.sort((blog1, blog2) => {
-        return blog2.likes - blog1.likes
-      })
-      setBlogs(blogs)
-    })
-  }, [])
+    dispatch(initializeBlogs())
+  }, [dispatch])
 
   useEffect(() => {
     const existingLoggedInUser = JSON.parse(
@@ -111,14 +107,7 @@ const App = () => {
 
   const handleSave = async (title, author, url) => {
     try {
-      const createdBlog = await blogService.createNewBlog({
-        title,
-        author,
-        url,
-      })
-      setBlogs((prevBlogs) => {
-        return [...prevBlogs, createdBlog]
-      })
+      dispatch(createNewBlog({ title, author, url }))
       const successNotification = {
         success: true,
         msg: 'Created new blog.',
@@ -159,7 +148,6 @@ const App = () => {
             <Blog
               key={blog.id}
               blog={blog}
-              setBlogs={setBlogs}
               loggedInUser={user}
             />
           ))}

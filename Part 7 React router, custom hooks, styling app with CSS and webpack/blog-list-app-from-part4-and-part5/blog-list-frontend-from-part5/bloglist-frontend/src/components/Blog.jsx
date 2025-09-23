@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux'
 
 const Blog = ({
   blog,
-  setBlogs,
   loggedInUser,
   handleLike,
 }) => {
@@ -22,14 +21,14 @@ const Blog = ({
       likes: blog.likes + 1,
       user: blog.user.id,
     })
-    setBlogs((prevBlogs) => {
-      const newBlogs = [...prevBlogs]
-      const newBlog = newBlogs.find((nBlog) => nBlog.id === updatedBlog.id)
-      newBlog.likes = updatedBlog.likes
-      return newBlogs.sort((blog1, blog2) => {
-        return blog2.likes - blog1.likes
-      })
-    })
+    // setBlogs((prevBlogs) => {
+    //   const newBlogs = [...prevBlogs]
+    //   const newBlog = newBlogs.find((nBlog) => nBlog.id === updatedBlog.id)
+    //   newBlog.likes = updatedBlog.likes
+    //   return newBlogs.sort((blog1, blog2) => {
+    //     return blog2.likes - blog1.likes
+    //   })
+    // })
   }
 
   const likeHandler = handleLike ?? customLikeHandler
@@ -52,11 +51,11 @@ const Blog = ({
     if (window.confirm(`Do you want to delete ${blog.title}?`)) {
       try {
         await blogService.deleteBlog(blog)
-        setBlogs((prevBlogs) => {
-          return prevBlogs.filter((pBlog) => {
-            return pBlog.id !== blog.id
-          })
-        })
+        // setBlogs((prevBlogs) => {
+        //   return prevBlogs.filter((pBlog) => {
+        //     return pBlog.id !== blog.id
+        //   })
+        // })
       } catch (e) {
         // eslint-disable-next-line no-unused-vars
         const failedNotification = {
