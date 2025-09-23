@@ -1,16 +1,15 @@
-import { useState, useEffect, useRef } from 'react'
-import Blog from './components/Blog'
+import { useState, useEffect } from 'react'
 import blogService from './services/blogs'
-import NewBlogForm from './components/NewBlogForm'
 import Notification from './components/Notification'
-import Togglable from './components/Togglable'
 import { handleNotification } from './utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { notificationSelector } from './reducers/notificationReducer'
-import { blogsSelector, createNewBlog, initializeBlogs } from './reducers/blogsReducer'
+import { blogsSelector, initializeBlogs } from './reducers/blogsReducer'
 import { handleLoginAction, removeUser, setUser, userSelector } from './reducers/userReducer'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useMatch } from 'react-router-dom'
 import Users from './components/Users'
+import User from './components/User'
+import Blogs from './components/Blogs'
 
 const LOGGED_IN_USER = 'loggedInUser'
 
@@ -64,7 +63,7 @@ const App = () => {
   const user = useSelector(userSelector)
   const notification = useSelector(notificationSelector)
   const blogs = useSelector(blogsSelector)
-  const togglableRef = useRef()
+  const match = useMatch('/users/:id')
 
   useEffect(() => {
     dispatch(initializeBlogs())
@@ -89,24 +88,7 @@ const App = () => {
     handleNotification(successNotification, dispatch)
   }
 
-  const handleSave = async (title, author, url) => {
-    try {
-      dispatch(createNewBlog({ title, author, url }))
-      const successNotification = {
-        success: true,
-        msg: 'Created new blog.',
-      }
-      handleNotification(successNotification, dispatch)
-      togglableRef.current.toggleVisibility()
-    } catch (e) {
-      // eslint-disable-next-line no-unused-vars
-      const failedNotification = {
-        success: false,
-        msg: 'Failed to create new blog.',
-      }
-      handleNotification(failedNotification, dispatch)
-    }
-  }
+  
 
   return (
     <div>
@@ -123,20 +105,10 @@ const App = () => {
               Logout
             </button>
           </div>
-          <div style={{ marginBottom: '10px' }}>
-            <Togglable buttonLabel={'Create New Blog'} ref={togglableRef}>
-              <NewBlogForm handleSave={handleSave} />
-            </Togglable>
-          </div>
-          {blogs.map((blog) => (
-            <Blog
-              key={blog.id}
-              blog={blog}
-              loggedInUser={user}
-            />
-          ))}
           <Routes>
+            <Route path='/users/:id' element={<User userId={match?.params.id}/>}/>
             <Route path='/users' element={<Users/>}/>
+            <Route path='/blogs' element={<Blogs blogs={blogs} user={user}/>}/>
           </Routes>
         </div>
       )}

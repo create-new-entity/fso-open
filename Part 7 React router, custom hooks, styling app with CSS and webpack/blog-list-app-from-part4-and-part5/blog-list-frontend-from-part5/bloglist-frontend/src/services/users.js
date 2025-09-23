@@ -9,7 +9,13 @@ const getUsersDetails = async () => {
   return response.data
 }
 
+const getUserDetails = async (userId) => {
+  const response = await axios.get(`${server}${usersBaseUrl}/${userId}`)
+  return response.data
+}
+
 export default {
+  getUserDetails,
   getUsersDetails
 }
 

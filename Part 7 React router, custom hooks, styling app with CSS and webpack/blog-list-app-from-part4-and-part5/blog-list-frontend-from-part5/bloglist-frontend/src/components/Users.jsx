@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import usersServices from './../services/users'
+import { Link } from 'react-router-dom'
 
 
 const Users = () => {
@@ -24,10 +25,10 @@ const Users = () => {
         </thead>
         <tbody>
           {
-            users.map((user) => {
+            users.map((user, index) => {
               return (
-                <tr>
-                  <td>{user.name}</td>
+                <tr key={user + index}>
+                  <td><Link to={`/users/${user.id}`}>{user.name}</Link></td>
                   <td>{user.blogs.length}</td>
                 </tr>
               )

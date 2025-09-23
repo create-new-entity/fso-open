@@ -4,20 +4,25 @@ const bcrypt = require('bcrypt')
 
 const baseURL = '/api/users'
 
-usersRoutes.get(baseURL, async (request, response) => {
+usersRoutes.get(baseURL, async (req, res) => {
     const users = await User.find({}).populate('blogs')
-    response.json(users)
+    res.json(users)
 })
 
-usersRoutes.post(baseURL, async (request, response) => {
-    const { username, name, password } = request.body
+usersRoutes.get(`${baseURL}/:id`, async (req, res) => {
+    const user = await User.findById(req.params.id).populate('blogs')
+    res.json(user)
+})
+
+usersRoutes.post(baseURL, async (req, res) => {
+    const { username, name, password } = req.body
 
     if(!password) {
-        response.status(400).send({ error: 'Password is required.' })
+        res.status(400).send({ error: 'Password is required.' })
         return
     }
     if(password.length < 3) {
-        response.status(400).send({ error: 'Password should be at least 3 characters long.' })
+        res.status(400).send({ error: 'Password should be at least 3 characters long.' })
         return
     }
 
@@ -32,7 +37,7 @@ usersRoutes.post(baseURL, async (request, response) => {
     })
 
     const savedUser = await user.save()
-    response.status(201).json(savedUser)
+    res.status(201).json(savedUser)
 })
 
 usersRoutes.delete(`${baseURL}/:id`, async (req, res) => {
