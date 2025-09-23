@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { notificationSelector } from './reducers/notificationReducer'
 import { blogsSelector, createNewBlog, initializeBlogs } from './reducers/blogsReducer'
 import { handleLoginAction, removeUser, setUser, userSelector } from './reducers/userReducer'
+import { Route, Routes } from 'react-router-dom'
+import Users from './components/Users'
 
 const LOGGED_IN_USER = 'loggedInUser'
 
@@ -133,6 +135,9 @@ const App = () => {
               loggedInUser={user}
             />
           ))}
+          <Routes>
+            <Route path='/users' element={<Users/>}/>
+          </Routes>
         </div>
       )}
     </div>
