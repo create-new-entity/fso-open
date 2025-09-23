@@ -1,15 +1,16 @@
 import { useState } from 'react'
 import blogService from '../services/blogs'
 import { handleNotification } from '../utils'
+import { useDispatch } from 'react-redux'
 
 const Blog = ({
   blog,
   setBlogs,
   loggedInUser,
-  setNotification,
   handleLike,
 }) => {
   const [showDetails, setShowDetails] = useState(false)
+  const dispatch = useDispatch()
 
   const handleVisibility = () => {
     setShowDetails(!showDetails)
@@ -62,7 +63,7 @@ const Blog = ({
           success: false,
           msg: 'Blog deletion failed.',
         }
-        handleNotification(failedNotification, setNotification)
+        handleNotification(failedNotification, dispatch)
       }
     }
   }

@@ -5,13 +5,16 @@ import NewBlogForm from './components/NewBlogForm'
 import Notification from './components/Notification'
 import Togglable from './components/Togglable'
 import { handleNotification } from './utils'
+import { useDispatch, useSelector } from 'react-redux'
+import { notificationSelector } from './reducers/notificationReducer'
 
 const LOGGED_IN_USER = 'loggedInUser'
 
 const Login = (props) => {
-  const { setUser, setNotification } = props
+  const { setUser } = props
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const dispatch = useDispatch()
 
   const handleUserNameChange = (event) => {
     setUsername(event.target.value)
@@ -34,14 +37,14 @@ const Login = (props) => {
         success: true,
         msg: 'Logged in.',
       }
-      handleNotification(successNotification, setNotification)
+      handleNotification(successNotification, dispatch)
     } catch (e) {
       // eslint-disable-next-line no-unused-vars
       const failedNotification = {
         success: false,
         msg: 'Login failed.',
       }
-      handleNotification(failedNotification, setNotification)
+      handleNotification(failedNotification, dispatch)
     }
   }
 
@@ -73,7 +76,8 @@ const Login = (props) => {
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
-  const [notification, setNotification] = useState(null)
+  const dispatch = useDispatch()
+  const notification = useSelector(notificationSelector)
   const togglableRef = useRef()
 
   useEffect(() => {
@@ -102,7 +106,7 @@ const App = () => {
       success: true,
       msg: 'Logged out.',
     }
-    handleNotification(successNotification, setNotification)
+    handleNotification(successNotification, dispatch)
   }
 
   const handleSave = async (title, author, url) => {
@@ -119,7 +123,7 @@ const App = () => {
         success: true,
         msg: 'Created new blog.',
       }
-      handleNotification(successNotification, setNotification)
+      handleNotification(successNotification, dispatch)
       togglableRef.current.toggleVisibility()
     } catch (e) {
       // eslint-disable-next-line no-unused-vars
@@ -127,7 +131,7 @@ const App = () => {
         success: false,
         msg: 'Failed to create new blog.',
       }
-      handleNotification(failedNotification, setNotification)
+      handleNotification(failedNotification, dispatch)
     }
   }
 
@@ -136,7 +140,7 @@ const App = () => {
       {notification && (
         <Notification success={notification.success} msg={notification.msg} />
       )}
-      {!user && <Login setUser={setUser} setNotification={setNotification} />}
+      {!user && <Login setUser={setUser}/>}
       {user && (
         <div>
           <h2>Blogs</h2>
@@ -157,7 +161,6 @@ const App = () => {
               blog={blog}
               setBlogs={setBlogs}
               loggedInUser={user}
-              setNotification={setNotification}
             />
           ))}
         </div>
