@@ -5,13 +5,17 @@ import NewBlogForm from './components/NewBlogForm'
 import Notification from './components/Notification'
 import Togglable from './components/Togglable'
 import { handleNotification } from './utils'
+import { useDispatch, useSelector } from 'react-redux'
+import { notificationSelector } from './reducers/notificationReducer'
+import { blogsSelector, createNewBlog, initializeBlogs } from './reducers/blogsReducer'
+import { handleLoginAction, removeUser, setUser, userSelector } from './reducers/userReducer'
 
 const LOGGED_IN_USER = 'loggedInUser'
 
 const Login = (props) => {
-  const { setUser, setNotification } = props
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const dispatch = useDispatch()
 
   const handleUserNameChange = (event) => {
     setUsername(event.target.value)
@@ -23,26 +27,9 @@ const Login = (props) => {
 
   const handleLogin = async (e) => {
     e.preventDefault()
-    try {
-      const loggedInUser = await blogService.login({ username, password })
-      setUser(loggedInUser)
-      window.localStorage.setItem(LOGGED_IN_USER, JSON.stringify(loggedInUser))
-      setUsername('')
-      setPassword('')
-
-      const successNotification = {
-        success: true,
-        msg: 'Logged in.',
-      }
-      handleNotification(successNotification, setNotification)
-    } catch (e) {
-      // eslint-disable-next-line no-unused-vars
-      const failedNotification = {
-        success: false,
-        msg: 'Login failed.',
-      }
-      handleNotification(failedNotification, setNotification)
-    }
+    dispatch(handleLoginAction({ username, password }))
+    setUsername('')
+    setPassword('')
   }
 
   return (
@@ -71,55 +58,43 @@ const Login = (props) => {
 }
 
 const App = () => {
-  const [blogs, setBlogs] = useState([])
-  const [user, setUser] = useState(null)
-  const [notification, setNotification] = useState(null)
+  const dispatch = useDispatch()
+  const user = useSelector(userSelector)
+  const notification = useSelector(notificationSelector)
+  const blogs = useSelector(blogsSelector)
   const togglableRef = useRef()
 
   useEffect(() => {
-    blogService.getAll().then((blogs) => {
-      blogs.sort((blog1, blog2) => {
-        return blog2.likes - blog1.likes
-      })
-      setBlogs(blogs)
-    })
-  }, [])
+    dispatch(initializeBlogs())
+  }, [dispatch])
 
   useEffect(() => {
     const existingLoggedInUser = JSON.parse(
       window.localStorage.getItem(LOGGED_IN_USER)
     )
     if (existingLoggedInUser) {
-      setUser(existingLoggedInUser)
+      dispatch(setUser(existingLoggedInUser))
       blogService.setToken(existingLoggedInUser.token)
     }
-  }, [])
+  }, [dispatch])
 
   const handleLogOut = () => {
-    setUser(null)
-    window.localStorage.removeItem(LOGGED_IN_USER)
+    dispatch(removeUser())
     const successNotification = {
       success: true,
       msg: 'Logged out.',
     }
-    handleNotification(successNotification, setNotification)
+    handleNotification(successNotification, dispatch)
   }
 
   const handleSave = async (title, author, url) => {
     try {
-      const createdBlog = await blogService.createNewBlog({
-        title,
-        author,
-        url,
-      })
-      setBlogs((prevBlogs) => {
-        return [...prevBlogs, createdBlog]
-      })
+      dispatch(createNewBlog({ title, author, url }))
       const successNotification = {
         success: true,
         msg: 'Created new blog.',
       }
-      handleNotification(successNotification, setNotification)
+      handleNotification(successNotification, dispatch)
       togglableRef.current.toggleVisibility()
     } catch (e) {
       // eslint-disable-next-line no-unused-vars
@@ -127,7 +102,7 @@ const App = () => {
         success: false,
         msg: 'Failed to create new blog.',
       }
-      handleNotification(failedNotification, setNotification)
+      handleNotification(failedNotification, dispatch)
     }
   }
 
@@ -136,7 +111,7 @@ const App = () => {
       {notification && (
         <Notification success={notification.success} msg={notification.msg} />
       )}
-      {!user && <Login setUser={setUser} setNotification={setNotification} />}
+      {!user && <Login/>}
       {user && (
         <div>
           <h2>Blogs</h2>
@@ -155,9 +130,7 @@ const App = () => {
             <Blog
               key={blog.id}
               blog={blog}
-              setBlogs={setBlogs}
               loggedInUser={user}
-              setNotification={setNotification}
             />
           ))}
         </div>
