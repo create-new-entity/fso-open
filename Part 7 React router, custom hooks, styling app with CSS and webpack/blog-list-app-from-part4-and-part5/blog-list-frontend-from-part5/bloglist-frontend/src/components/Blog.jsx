@@ -1,12 +1,11 @@
 import { useState } from 'react'
-import blogService from '../services/blogs'
 import { handleNotification } from '../utils'
 import { useDispatch } from 'react-redux'
+import { handleUpdateBlog, handleDeleteBlog } from './../reducers/blogsReducer'
 
 const Blog = ({
   blog,
-  loggedInUser,
-  handleLike,
+  loggedInUser
 }) => {
   const [showDetails, setShowDetails] = useState(false)
   const dispatch = useDispatch()
@@ -15,23 +14,13 @@ const Blog = ({
     setShowDetails(!showDetails)
   }
 
-  const customLikeHandler = async () => {
-    const updatedBlog = await blogService.updateBlog({
+  const handleLike = () => {
+    dispatch(handleUpdateBlog({
       ...blog,
       likes: blog.likes + 1,
       user: blog.user.id,
-    })
-    // setBlogs((prevBlogs) => {
-    //   const newBlogs = [...prevBlogs]
-    //   const newBlog = newBlogs.find((nBlog) => nBlog.id === updatedBlog.id)
-    //   newBlog.likes = updatedBlog.likes
-    //   return newBlogs.sort((blog1, blog2) => {
-    //     return blog2.likes - blog1.likes
-    //   })
-    // })
+    }))
   }
-
-  const likeHandler = handleLike ?? customLikeHandler
 
   const blogStyle = {
     padding: 10,
@@ -50,12 +39,7 @@ const Blog = ({
   const handleDelete = async () => {
     if (window.confirm(`Do you want to delete ${blog.title}?`)) {
       try {
-        await blogService.deleteBlog(blog)
-        // setBlogs((prevBlogs) => {
-        //   return prevBlogs.filter((pBlog) => {
-        //     return pBlog.id !== blog.id
-        //   })
-        // })
+        dispatch(handleDeleteBlog(blog))
       } catch (e) {
         // eslint-disable-next-line no-unused-vars
         const failedNotification = {
@@ -87,7 +71,7 @@ const Blog = ({
           <p className="blog-url">{blog.url}</p>
           <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
             <div className="blog-likes">{blog.likes}</div>
-            <button style={{ marginLeft: '10px' }} onClick={likeHandler}>
+            <button style={{ marginLeft: '10px' }} onClick={handleLike}>
               Like
             </button>
           </div>
