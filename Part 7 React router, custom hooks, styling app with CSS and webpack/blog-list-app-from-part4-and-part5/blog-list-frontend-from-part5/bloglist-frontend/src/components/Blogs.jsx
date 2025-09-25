@@ -1,10 +1,10 @@
 import { useRef } from 'react'
-import Blog from './Blog'
 import { useDispatch } from 'react-redux'
 import { createNewBlog } from '../reducers/blogsReducer'
 import { handleNotification } from '../utils'
 import Togglable from './Togglable'
 import NewBlogForm from './../components/NewBlogForm'
+import BlogListItem from './BlogListItem'
 
 const Blogs = ({ blogs, user }) => {
   const togglableRef = useRef()
@@ -35,11 +35,11 @@ const Blogs = ({ blogs, user }) => {
           <NewBlogForm handleSave={handleSave} />
         </Togglable>
       </div>
+      
       {blogs.map((blog) => (
-        <Blog
-          key={blog.id}
+        <BlogListItem
           blog={blog}
-          loggedInUser={user}
+          key={blog.id}
         />
       ))}
     </div>

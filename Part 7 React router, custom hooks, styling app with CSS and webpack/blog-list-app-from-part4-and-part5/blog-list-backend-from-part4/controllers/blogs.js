@@ -10,6 +10,11 @@ blogsRoutes.get(baseURL, async (req, res) => {
     res.json(blogs)
 })
 
+blogsRoutes.get(`${baseURL}/:id`, async (req, res) => {
+    const blog = await Blog.findById(req.params.id).populate('user')
+    res.json(blog)
+})
+
 blogsRoutes.post(baseURL, userExtractor, async (req, res) => {
 
     const candidateUser = req.user

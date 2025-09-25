@@ -17,6 +17,11 @@ const getAll = () => {
   return request.then((response) => response.data)
 }
 
+const getBlog = (blogId) => {
+  const request = axios.get(`${blogsBaseUrl}/${blogId}`)
+  return request.then((response) => response.data)
+}
+
 const login = async (payload) => {
   const response = await axios.post(`${server}${loginBaseUrl}`, payload)
   setToken(response.data.token)
@@ -68,6 +73,7 @@ const deleteBlog = async (blog) => {
 
 export default {
   getAll,
+  getBlog,
   login,
   createNewBlog,
   setToken,

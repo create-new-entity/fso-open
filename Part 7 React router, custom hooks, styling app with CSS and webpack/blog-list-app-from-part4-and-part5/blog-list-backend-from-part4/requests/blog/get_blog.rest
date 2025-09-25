@@ -3,3 +3,7 @@ GET http://localhost:3003/api/blogs
 ###
 
 GET http://localhost:3003/unknown_endpoint
+
+###
+
+GET http://localhost:3003/api/blogs/68c768b42a6bfb309d4178c9

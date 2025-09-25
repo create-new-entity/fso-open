@@ -10,6 +10,7 @@ import { Route, Routes, useMatch } from 'react-router-dom'
 import Users from './components/Users'
 import User from './components/User'
 import Blogs from './components/Blogs'
+import Blog from './components/Blog'
 
 const LOGGED_IN_USER = 'loggedInUser'
 
@@ -64,6 +65,7 @@ const App = () => {
   const notification = useSelector(notificationSelector)
   const blogs = useSelector(blogsSelector)
   const match = useMatch('/users/:id')
+  const blogMatch = useMatch('/blogs/:id')
 
   useEffect(() => {
     dispatch(initializeBlogs())
@@ -88,8 +90,6 @@ const App = () => {
     handleNotification(successNotification, dispatch)
   }
 
-  
-
   return (
     <div>
       {notification && (
@@ -108,7 +108,8 @@ const App = () => {
           <Routes>
             <Route path='/users/:id' element={<User userId={match?.params.id}/>}/>
             <Route path='/users' element={<Users/>}/>
-            <Route path='/blogs' element={<Blogs blogs={blogs} user={user}/>}/>
+            <Route path='/blogs/:id' element={<Blog blogId={blogMatch?.params.id}/>}/>
+            <Route path='/' element={<Blogs blogs={blogs} user={user}/>}/>
           </Routes>
         </div>
       )}
