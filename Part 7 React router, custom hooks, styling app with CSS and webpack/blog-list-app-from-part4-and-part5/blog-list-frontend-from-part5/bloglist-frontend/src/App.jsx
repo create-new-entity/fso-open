@@ -11,6 +11,7 @@ import Users from './components/Users'
 import User from './components/User'
 import Blogs from './components/Blogs'
 import Blog from './components/Blog'
+import NavMenu from './components/NavMenu'
 
 const LOGGED_IN_USER = 'loggedInUser'
 
@@ -98,19 +99,16 @@ const App = () => {
       {!user && <Login/>}
       {user && (
         <div>
-          <h2>Blogs</h2>
-          <div style={{ marginBottom: '20px' }}>
-            <span>{user.name} logged in</span>
-            <button style={{ marginLeft: '15px' }} onClick={handleLogOut}>
-              Logout
-            </button>
+          <NavMenu/>
+          <div>
+            <h2>Blogs</h2>
+            <Routes>
+              <Route path='/users/:id' element={<User userId={match?.params.id}/>}/>
+              <Route path='/users' element={<Users/>}/>
+              <Route path='/blogs/:id' element={<Blog blogId={blogMatch?.params.id}/>}/>
+              <Route path='/' element={<Blogs blogs={blogs} user={user}/>}/>
+            </Routes>
           </div>
-          <Routes>
-            <Route path='/users/:id' element={<User userId={match?.params.id}/>}/>
-            <Route path='/users' element={<Users/>}/>
-            <Route path='/blogs/:id' element={<Blog blogId={blogMatch?.params.id}/>}/>
-            <Route path='/' element={<Blogs blogs={blogs} user={user}/>}/>
-          </Routes>
         </div>
       )}
     </div>
