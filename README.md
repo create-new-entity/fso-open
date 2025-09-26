@@ -314,7 +314,7 @@ All Part 6 exercises commits are [here](https://github.com/create-new-entity/fso
 ### Part 7 React router, custom hooks, styling app with CSS and webpack Contents:
 ##### [Course Page ↗](https://fullstackopen.com/en/part7)
 
-All Part 7 exercises commits are [here]()
+All Part 7 exercises commits are [here](https://github.com/create-new-entity/fso-open/compare/9e8f08a%5E...2cea193)
 
 <ol>
     <li>
