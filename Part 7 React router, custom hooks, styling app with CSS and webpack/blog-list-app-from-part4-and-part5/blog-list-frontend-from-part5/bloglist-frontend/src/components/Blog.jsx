@@ -37,6 +37,18 @@ const Blog = (props) => {
         <button onClick={handleLike}>Like</button>
       </div>
       <p>Added by {blog.author}</p>
+      <div>
+        <h2>Comments</h2>
+        <ul>
+          {
+            blog.comments.map((comment, index) => {
+              return (
+                <li key={index}>{comment}</li>
+              )
+            })
+          }
+        </ul>
+      </div>
     </div>
   )
 }

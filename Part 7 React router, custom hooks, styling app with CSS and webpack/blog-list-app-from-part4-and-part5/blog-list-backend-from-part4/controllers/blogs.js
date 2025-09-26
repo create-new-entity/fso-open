@@ -57,6 +57,14 @@ blogsRoutes.delete(`${baseURL}/:id`, userExtractor, async (req, res) => {
     res.status(200).end()
 })
 
+blogsRoutes.put(`${baseURL}/:id/comments`, async (req, res) => {
+    const blog = await Blog.findById(req.params.id)
+    const { comment } = req.body
+    blog.comments = blog.comments.concat(comment)
+    await blog.save()
+    res.status(200).send(blog.toJSON())
+})
+
 blogsRoutes.put(`${baseURL}/:id`, userExtractor, async (req, res) => {
     const candidateUser = req.user
     const blogToUpdate = req.body
