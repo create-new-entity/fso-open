@@ -5,6 +5,7 @@ import { handleNotification } from '../utils'
 import Togglable from './Togglable'
 import NewBlogForm from './../components/NewBlogForm'
 import BlogListItem from './BlogListItem'
+import { Box } from '@mui/material'
 
 const Blogs = ({ blogs, user }) => {
   const togglableRef = useRef()
@@ -29,20 +30,21 @@ const Blogs = ({ blogs, user }) => {
   }
 
   return (
-    <div>
-      <div style={{ marginBottom: '10px' }}>
+    <Box>
+      <h2>Blogs</h2>
+      <Box style={{ marginBottom: '10px' }}>
         <Togglable buttonLabel={'Create New Blog'} ref={togglableRef}>
           <NewBlogForm handleSave={handleSave} />
         </Togglable>
-      </div>
-      
+      </Box>
+
       {blogs.map((blog) => (
         <BlogListItem
           blog={blog}
           key={blog.id}
         />
       ))}
-    </div>
+    </Box>
   )
 }
 

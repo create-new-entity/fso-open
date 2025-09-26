@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux'
 import { handleUpdateBlog } from '../reducers/blogsReducer'
+import { Box, Button, Input } from '@mui/material'
 
 const NewCommentForm = (props) => {
   const { blog } = props
@@ -14,14 +15,14 @@ const NewCommentForm = (props) => {
     }
     e.target.newComment.value = ''
   }
-  console.log('blog', blog)
+
   return (
-    <div>
+    <Box>
       <form onSubmit={handleSubmit}>
-        <input name='newComment'/>
-        <button type='submit'>Add Comment</button>
+        <Input name='newComment'/>
+        <Button type='submit'>Add Comment</Button>
       </form>
-    </div>
+    </Box>
   )
 }
 
@@ -41,16 +42,17 @@ const Blog = (props) => {
     return null
   }
 
+
   return (
-    <div>
+    <Box>
       <h2>{blog.title}</h2>
       <a>{blog.url}</a>
-      <div>
+      <Box>
         {blog.likes} likes
-        <button onClick={handleLike}>Like</button>
-      </div>
+        <Button onClick={handleLike}>Like</Button>
+      </Box>
       <p>Added by {blog.author}</p>
-      <div>
+      <Box>
         <h2>Comments</h2>
         <NewCommentForm blog={blog}/>
         <ul>
@@ -62,8 +64,8 @@ const Blog = (props) => {
             })
           }
         </ul>
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }
 

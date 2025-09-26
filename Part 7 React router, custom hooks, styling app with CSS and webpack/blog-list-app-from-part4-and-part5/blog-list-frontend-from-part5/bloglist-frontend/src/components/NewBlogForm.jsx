@@ -1,3 +1,4 @@
+import { Button } from '@mui/material'
 import { useState } from 'react'
 
 // NewBlogForm component is exrcise 5.6
@@ -46,7 +47,7 @@ const NewBlogForm = (props) => {
           </label>
         </div>
       </div>
-      <button type="submit">Create</button>
+      <Button type="submit">Create</Button>
     </form>
   )
 }

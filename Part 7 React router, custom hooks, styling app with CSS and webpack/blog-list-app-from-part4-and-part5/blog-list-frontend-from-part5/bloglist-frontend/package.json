@@ -12,6 +12,8 @@
     "prettier": "npx prettier . --write"
   },
   "dependencies": {
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^7.3.2",
     "@reduxjs/toolkit": "^2.9.0",
     "axios": "^1.11.0",
     "react": "^19.0.0",

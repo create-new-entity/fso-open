@@ -1,40 +1,44 @@
-import { useState } from 'react'
-import { handleNotification } from '../utils'
-import { useDispatch } from 'react-redux'
-import { handleUpdateBlog, handleDeleteBlog } from '../reducers/blogsReducer'
 import { Link } from 'react-router-dom'
+import { Box } from '@mui/material'
+
+
+const styles = {
+  blog: {
+    padding: '5px',
+    border: 'solid',
+    borderWidth: '1px',
+    borderRadius: '5px',
+    marginBottom: '5px',
+    backgroundColor: '#298F24'
+  },
+  link: {
+    '& a': {
+      color: 'white',
+      textDecoration: 'none'
+    }
+  }
+}
 
 const BlogListItem = ({
   blog
 }) => {
-  const [showDetails, setShowDetails] = useState(false)
-  const dispatch = useDispatch()
-
-  const blogStyle = {
-    padding: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginBottom: '5px',
-  }
-  
 
   return (
-    <div style={blogStyle} className="blog">
-      <div
+    <Box sx={styles.blog} className="blog">
+      <Box
         style={{
           display: 'flex',
           justifyContent: 'flex-start',
           marginLeft: '10px',
         }}
       >
-        <div className="blog-title">
+        <Box sx={styles.link} className="blog-title">
           <Link to={`/blogs/${blog.id}`}>
             {blog.title}
           </Link>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   )
 }
 

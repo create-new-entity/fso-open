@@ -2,7 +2,25 @@ import { useDispatch, useSelector } from 'react-redux'
 import { removeUser, userSelector } from '../reducers/userReducer'
 import { handleNotification } from '../utils'
 import { Link } from 'react-router-dom'
+import { Box, Button } from '@mui/material'
 
+const styles = {
+  container: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#F7E0DC',
+    borderRadius: '5px',
+    padding: '5px'
+  },
+  links: {
+    display: 'flex',
+    gap: '5px'
+  },
+  logoutButton: {
+    paddingRight: '0px'
+  }
+}
 
 const NavMenu = () => {
   const user = useSelector(userSelector)
@@ -18,16 +36,16 @@ const NavMenu = () => {
   }
 
   return (
-    <div style={{ display: 'flex', gap: '5px', backgroundColor: '#F7E0DC' }}>
-      <div style={{ display: 'flex', gap: '5px' }}>
+    <Box sx={styles.container}>
+      <Box sx={styles.links}>
         <Link to='/'>Blogs</Link>
         <Link to='/users'>Users</Link>
-      </div>
-      <div>
+      </Box>
+      <Box>
         {user.name} logged in
-        <button style={{ marginLeft: '10px' }} onClick={handleLogout}>Logout</button>
-      </div>
-    </div>
+        <Button sx={styles.logoutButton} onClick={handleLogout}>Logout</Button>
+      </Box>
+    </Box>
   )
 }
 

@@ -12,6 +12,7 @@ import User from './components/User'
 import Blogs from './components/Blogs'
 import Blog from './components/Blog'
 import NavMenu from './components/NavMenu'
+import { Container } from '@mui/material'
 
 const LOGGED_IN_USER = 'loggedInUser'
 
@@ -89,26 +90,27 @@ const App = () => {
   }
 
   return (
-    <div>
-      {notification && (
-        <Notification success={notification.success} msg={notification.msg} />
-      )}
-      {!user && <Login/>}
-      {user && (
-        <div>
-          <NavMenu/>
+    <Container>
+      <div>
+        {notification && (
+          <Notification success={notification.success} msg={notification.msg} />
+        )}
+        {!user && <Login/>}
+        {user && (
           <div>
-            <h2>Blogs</h2>
-            <Routes>
-              <Route path='/users/:id' element={<User userId={match?.params.id}/>}/>
-              <Route path='/users' element={<Users/>}/>
-              <Route path='/blogs/:id' element={<Blog blog={getBlog()}/>}/>
-              <Route path='/' element={<Blogs blogs={blogs} user={user}/>}/>
-            </Routes>
+            <NavMenu/>
+            <div>
+              <Routes>
+                <Route path='/users/:id' element={<User userId={match?.params.id}/>}/>
+                <Route path='/users' element={<Users/>}/>
+                <Route path='/blogs/:id' element={<Blog blog={getBlog()}/>}/>
+                <Route path='/' element={<Blogs blogs={blogs} user={user}/>}/>
+              </Routes>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </Container>
   )
 }
 
