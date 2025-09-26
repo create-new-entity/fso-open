@@ -82,13 +82,10 @@ const App = () => {
     }
   }, [dispatch])
 
-  const handleLogOut = () => {
-    dispatch(removeUser())
-    const successNotification = {
-      success: true,
-      msg: 'Logged out.',
-    }
-    handleNotification(successNotification, dispatch)
+  const getBlog = () => {
+    return blogs.find((blog) => {
+      return blog.id.toString() === blogMatch?.params.id.toString()
+    })
   }
 
   return (
@@ -105,7 +102,7 @@ const App = () => {
             <Routes>
               <Route path='/users/:id' element={<User userId={match?.params.id}/>}/>
               <Route path='/users' element={<Users/>}/>
-              <Route path='/blogs/:id' element={<Blog blogId={blogMatch?.params.id}/>}/>
+              <Route path='/blogs/:id' element={<Blog blog={getBlog()}/>}/>
               <Route path='/' element={<Blogs blogs={blogs} user={user}/>}/>
             </Routes>
           </div>

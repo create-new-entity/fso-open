@@ -47,9 +47,13 @@ const blogsSlice = createSlice({
       return state
     },
     updateBlog(state, action) {
-      const foundBlog = state.find((blog) => blog.id.toString() === action.payload.id.toString())
-      foundBlog.likes = action.payload.likes
-      return state.sort(sortBlogsByLike)
+      const updated = state.map(blog =>
+        blog.id.toString() === action.payload.id.toString()
+          ? { ...blog, likes: action.payload.likes, comments: action.payload.comments }
+          : blog
+      )
+      updated.sort(sortBlogsByLike)
+      return updated
     },
     deleteBlog(state, action) {
       const foundIndex = state.findIndex((blog) => blog.id.toString() === action.payload.toString())

@@ -70,14 +70,11 @@ blogsRoutes.put(`${baseURL}/:id`, userExtractor, async (req, res) => {
     const blogToUpdate = req.body
     blogToUpdate.user = candidateUser._id
 
-    const updatedBlog = await Blog.findById(req.params.id)
-
-    updatedBlog.title = blogToUpdate.title
-    updatedBlog.author = blogToUpdate.author
-    updatedBlog.url = blogToUpdate.url
-    updatedBlog.likes = blogToUpdate.likes
-
-    await updatedBlog.save()
+    const updatedBlog = await Blog.findByIdAndUpdate(
+        req.params.id,
+        blogToUpdate,
+        { new: true, runValidators: true }
+    )
     
     res.status(200).send(updatedBlog.toJSON())
 })
