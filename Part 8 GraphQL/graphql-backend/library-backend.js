@@ -54,21 +54,27 @@ const typeDefs = `
     editAuthor(
         name: String!,
         setBornTo: Int!
-    ): Author
+    ): Author!
   }
 `
 
 const resolvers = {
   Author: {
     bookCount: (root) => {
-        const author = root.name
-        return books.filter(book => book.author === root.name).length
+        return -1
     }
   },
   Query: {
-    bookCount: () => books.length,
-    authorCount: () => authors.length,
-    allBooks: (root, args) => {
+    bookCount: async () => {
+        const allBooks = await Book.find({})
+        return allBooks.length
+    },
+    authorCount: async () => {
+        const allAuthors = await Author.find({})
+        return allAuthors.length
+    },
+    allBooks: async (root, args) => {
+        const books = await Book.find({}).populate('author')
         if(!args.author && !args.genre) {
             return books
         }
@@ -85,8 +91,8 @@ const resolvers = {
         }
         return result
     },
-    allAuthors: () => {
-        return authors
+    allAuthors: async (root, args) => {
+        return Author.find({})
     } 
   },
   Mutation: {
@@ -117,15 +123,10 @@ const resolvers = {
             })
         }
     },
-    editAuthor: (root, args) => {
+    editAuthor: async (root, args) => {
         const { name, setBornTo } = args
-        authors = authors.map((author) => {
-            return author.name === name ?
-                { ...author, born: setBornTo }
-                :
-                author
-        })
-        return authors.find(author => author.name === name)
+        const updatedAuthor = await Author.findOneAndUpdate({ name }, { born: setBornTo }, { new: true })
+        return updatedAuthor
     }
   }
 }
