@@ -113,13 +113,12 @@ const resolvers = {
             return savedNewBook
         }
         catch(error) {
-            console.log('error', error)
             throw new GraphQLError('Saving book failed.', {
-            extensions: {
-                code: 'BAD_USER_INPUT',
-                invalidArgs: args,
-                error
-            }
+                extensions: {
+                    code: 'BAD_USER_INPUT',
+                    invalidArgs: args,
+                    error
+                }
             })
         }
     },
