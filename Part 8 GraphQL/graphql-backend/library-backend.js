@@ -137,7 +137,6 @@ const resolvers = {
             if(!foundAuthor.length) {
                 const newAuthor = new Author({ name: args.author })
                 foundAuthor = await newAuthor.save()
-                console.log('foundAuthor', foundAuthor)
             }
 
             args.author = foundAuthor.id
