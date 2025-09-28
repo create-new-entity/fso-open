@@ -50,9 +50,9 @@ const App = () => {
       </div>
 
       <Routes>
-        <Route path={'/authors'} element={<Authors show={true} />}/>
-        <Route path={'/books'} element={<Books show={true} />}/>
-        <Route path={'/add'} element={<NewBook show={true} />}/>
+        <Route path={'/authors'} element={<Authors/>}/>
+        <Route path={'/books'} element={<Books/>}/>
+        <Route path={'/add'} element={<NewBook/>}/>
         {
           !loggedInUserResult.loading &&
           loggedInUserResult.data?.me.favoriteGenre &&

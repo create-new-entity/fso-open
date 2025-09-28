@@ -14,7 +14,8 @@ const schema = new mongoose.Schema({
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Author'
+    ref: 'Author',
+    require: true
   },
   genres: [
     { type: String}

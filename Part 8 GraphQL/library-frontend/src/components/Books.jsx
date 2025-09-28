@@ -29,7 +29,7 @@ const Books = (props) => {
     return Array.from(uniqueGenresSet.values())
   }
 
-  const books = result.data.allBooks
+  const books = result.data ? result.data.allBooks : []
   const uniqueGenres = extractGenres(books)
 
   

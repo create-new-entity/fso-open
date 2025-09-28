@@ -104,7 +104,7 @@ const resolvers = {
         let result = books
         if(args.author) {
             result = books.filter((book) => {
-                return book.author === args.author
+                return book.author.name === args.author
             })
         }
         if(args.genre) {
@@ -139,7 +139,7 @@ const resolvers = {
                 foundAuthor = await newAuthor.save()
             }
 
-            args.author = foundAuthor.id
+            args.author = foundAuthor[0].id
 
             const newBook = new Book(args)
             const savedNewBook = await(await newBook.save()).populate('author')
