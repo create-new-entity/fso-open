@@ -1,14 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Authors from "./components/Authors";
 import Books from "./components/Books";
 import NewBook from "./components/NewBook";
 import { Link, Route, Routes, useNavigate } from "react-router";
 import Home from "./components/Home";
 import LoginForm, { BOOKS_LOGIN_TOKEN_KEY } from "./components/LoginForm";
+import { useLazyQuery } from "@apollo/client";
+import Recommended from "./components/Recommended";
+import { GET_LOGGED_IN_USER } from "./queries";
 
 const App = () => {
   const [token, setToken] = useState(null)
+  const [getLoggedInuser, loggedInUserResult] = useLazyQuery(GET_LOGGED_IN_USER)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if(token) {
+      getLoggedInuser()
+    }
+  }, [token, getLoggedInuser])
 
   const handleLogout = () => {
     setToken(null)
@@ -20,12 +30,14 @@ const App = () => {
     <div>
       <div style={{ display: 'flex', justifyContent: 'flex-start', gap: '5px' }}>
         <Link to={'/'}>Home</Link>
-        {
-          token && <Link to={'/authors'}>Authors</Link>
-        }
         <Link to={'/books'}>Books</Link>
         {
-          token && <Link to={'/add'}>Add book</Link>
+          token &&
+          <>
+            <Link to={'/authors'}>Authors</Link>
+            <Link to={'/add'}>Add book</Link>
+            <Link to={'/recommended'}>Recommended</Link>
+          </>
         }
         {
           !token &&
@@ -41,6 +53,11 @@ const App = () => {
         <Route path={'/authors'} element={<Authors show={true} />}/>
         <Route path={'/books'} element={<Books show={true} />}/>
         <Route path={'/add'} element={<NewBook show={true} />}/>
+        {
+          !loggedInUserResult.loading &&
+          loggedInUserResult.data?.me.favoriteGenre &&
+          <Route path={'/recommended'} element={<Recommended genre={loggedInUserResult.data?.me.favoriteGenre}/>} />
+        }
         <Route path={'/login'} element={<LoginForm setToken={setToken}/>}/>
         <Route path={'/'} element={<Home/>}/>
       </Routes>
