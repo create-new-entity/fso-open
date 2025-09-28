@@ -15,6 +15,11 @@ const App = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
+    const existingToken = localStorage.getItem(BOOKS_LOGIN_TOKEN_KEY)
+    setToken(existingToken)
+  }, [])
+
+  useEffect(() => {
     if(token) {
       getLoggedInuser()
     }
