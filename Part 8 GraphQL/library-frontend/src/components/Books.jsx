@@ -1,8 +1,21 @@
 import { useQuery } from "@apollo/client"
 import { ALL_BOOKS } from "../queries"
+import { useState } from "react"
+
+const styles = {
+  genreCell: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    gap: '5px',
+    paddingTop: '10px'
+  }
+}
 
 const Books = (props) => {
-  const result = useQuery(ALL_BOOKS)
+  const [selectedGenre, setSelectedGenre] = useState('')
+  const result = useQuery(ALL_BOOKS, {
+    variables: { genre: selectedGenre }
+  })
 
   if(result.loading) {
     return (
@@ -12,7 +25,21 @@ const Books = (props) => {
     )
   }
 
+  const extractGenres = (books) => {
+    const nonUniqueGenres = books.reduce((acc, curr) => {
+      return [...acc, ...curr.genres]
+    }, [])
+
+    const uniqueGenresSet = new Set(nonUniqueGenres)
+    return Array.from(uniqueGenresSet.values())
+  }
+
   const books = result.data.allBooks
+  const uniqueGenres = extractGenres(books)
+
+  const getGenreHandler = (genre) => {
+    return () => setSelectedGenre(genre)
+  }
   
 
   return (
@@ -33,6 +60,16 @@ const Books = (props) => {
               <td>{a.published}</td>
             </tr>
           ))}
+          <tr>
+            <td colSpan={3} style={styles.genreCell}>
+              <button onClick={() => setSelectedGenre('')}>All Genres</button>
+              {
+                uniqueGenres.map((genre, index) => {
+                  return <button key={index} onClick={getGenreHandler(genre)}>{genre}</button>
+                })
+              }
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
