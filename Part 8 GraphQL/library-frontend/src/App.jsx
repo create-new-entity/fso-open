@@ -5,9 +5,25 @@ import NewBook from "./components/NewBook";
 import { Link, Route, Routes, useNavigate } from "react-router";
 import Home from "./components/Home";
 import LoginForm, { BOOKS_LOGIN_TOKEN_KEY } from "./components/LoginForm";
-import { useLazyQuery } from "@apollo/client";
+import { useLazyQuery, useSubscription } from "@apollo/client";
 import Recommended from "./components/Recommended";
-import { GET_LOGGED_IN_USER } from "./queries";
+import { ALL_BOOKS, BOOK_ADDED, GET_LOGGED_IN_USER } from "./queries";
+
+export const updateCache = (cache, query, addedBook) => {
+  const uniqByName = (a) => {
+    let seen = new Set()
+    return a.filter((item) => {
+      let k = item.title
+      return seen.has(k) ? false : seen.add(k)
+    })
+  }
+
+  cache.updateQuery(query, ({ allBooks }) => {
+    return {
+      allBooks: uniqByName(allBooks.concat(addedBook)),
+    }
+  })
+}
 
 const App = () => {
   const [token, setToken] = useState(null)
@@ -18,6 +34,16 @@ const App = () => {
     const existingToken = localStorage.getItem(BOOKS_LOGIN_TOKEN_KEY)
     setToken(existingToken)
   }, [])
+
+  useSubscription(BOOK_ADDED, {
+    onData: ({ data, client }) => {
+      const addedBook = data.data.bookAdded
+
+      window.alert(`New book ${addedBook.title} added.`)
+
+      updateCache(client.cache, { query: ALL_BOOKS, variables: { genre: '' } }, addedBook)
+    }
+  })
 
   useEffect(() => {
     if(token) {
