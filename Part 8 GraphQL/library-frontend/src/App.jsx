@@ -9,6 +9,9 @@ import { useLazyQuery, useSubscription } from "@apollo/client";
 import Recommended from "./components/Recommended";
 import { ALL_BOOKS, BOOK_ADDED, GET_LOGGED_IN_USER } from "./queries";
 
+
+// 8.25 works already after these changes: https://github.com/create-new-entity/fso-open/commit/9982dec2e906b44546e9157502bd231f6232df5f
+
 export const updateCache = (cache, query, addedBook) => {
   const uniqByName = (a) => {
     let seen = new Set()
