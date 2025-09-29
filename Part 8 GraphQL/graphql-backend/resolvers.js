@@ -9,7 +9,7 @@ const Author = require('./schemas/author')
 const resolvers = {
   Author: {
     bookCount: (root) => {
-        return -1
+        return root.booksAuthored.length
     }
   },
   Query: {
@@ -40,7 +40,8 @@ const resolvers = {
         return result
     },
     allAuthors: async (root, args) => {
-        return Author.find({})
+        const allAuthors = await Author.find({}).populate('booksAuthored')
+        return allAuthors
     },
     me: (root, args, context) => {
         return context.currentUser
@@ -61,13 +62,16 @@ const resolvers = {
             
             if(!foundAuthor.length) {
                 const newAuthor = new Author({ name: args.author })
-                foundAuthor = await newAuthor.save()
+                foundAuthor = [await newAuthor.save()]
             }
 
-            args.author = foundAuthor[0].id
-
+            foundAuthor = foundAuthor[0]
+            args.author = foundAuthor._id
             const newBook = new Book(args)
             const savedNewBook = await ((await newBook.save()).populate('author'))
+
+            foundAuthor.booksAuthored = foundAuthor.booksAuthored.concat(savedNewBook.id)
+            await foundAuthor.save()
             
             pubsub.publish('BOOK_ADDED', { bookAdded: savedNewBook })
             return savedNewBook
