@@ -1,6 +1,4 @@
-
-
-
+import { validateData } from "./validate";
 
 function getRating(average: number, target: number): Pick<Result, 'rating' | 'ratingDescription'> {
     if(average > target) {
@@ -35,7 +33,7 @@ interface Result {
 function calculateExercises(exerciseHours: number[], target: number): Result {
     const trainingDays = exerciseHours.filter(h => h > 0).length
     const totalWorkedOutHours = exerciseHours.reduce((acc, curr) => acc + curr)
-    const averageWorkedOutHourse = totalWorkedOutHours / 7
+    const averageWorkedOutHourse = totalWorkedOutHours / exerciseHours.length
 
     const success = averageWorkedOutHourse >= target
     const { rating, ratingDescription } = getRating(averageWorkedOutHourse, target)
@@ -52,4 +50,11 @@ function calculateExercises(exerciseHours: number[], target: number): Result {
 }
 
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2))
+validateData(process.argv.slice(2))
+
+const trainingDays = process.argv.slice(3).map(n => parseFloat(n))
+const target = parseInt(process.argv[2], 10)
+
+console.log(calculateExercises(trainingDays, target))
+
+// npm run calculateExercises 3 0 2 4.5 0 3 1 2
