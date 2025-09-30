@@ -355,4 +355,61 @@ All Part 7 exercises commits are [here](https://github.com/create-new-entity/fso
 **Keywords: React Router, Webpack, Styling.**
 
 ###### Go back to [Contents](#contents)
+
 ---
+
+### Part 8 GraphQL Contents:
+##### [Course Page ↗](https://fullstackopen.com/en/part8)
+
+All Part 8 exercises commits are [here](https://github.com/create-new-entity/fso-open/compare/8378dec%5E...1559e72)
+
+<ol>
+    <li>
+        GraphQL-server
+        <ul>
+            <li>
+                Exercises 8.1 - 8.7
+            </li>
+        </ul>
+    </li>
+    <li>
+        React and GraphQL
+        <ul>
+            <li>
+                Exercises 8.8 - 8.12
+            </li>
+        </ul>
+    </li>
+    <li>
+        Database and user administration
+        <ul>
+            <li>
+                Exercises 8.13 - 8.16
+            </li>
+        </ul>
+    </li>
+    <li>
+        Login and updating the cache
+        <ul>
+            <li>
+                Exercises 8.17 - 8.22
+            </li>
+        </ul>
+    </li>
+    <li>
+        Fragments and subscriptions
+        <ul>
+            <li>
+                Exercises 8.23 - 8.26
+            </li>
+        </ul>
+    </li>
+</ol>
+
+**Keywords: Apollo Client, Apollo Server, Cache Handling, Subscription.**
+
+###### Go back to [Contents](#contents)
+
+---
+
+
