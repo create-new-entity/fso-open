@@ -1,6 +1,10 @@
 import { validateData } from "./validate"
 
-function calculateBmi(height: number, weight: number): string {
+export function calculateBmi(argHeight: string, argWeight: string): string {
+    validateData([argHeight, argWeight])
+
+    let height: number = parseFloat(argHeight)
+    let weight: number = parseFloat(argWeight)
 
     if(height <= 0 || weight <= 0) {
         throw new Error('Height or Weight can not be zero or negative.')
@@ -36,11 +40,7 @@ function calculateBmi(height: number, weight: number): string {
     throw new Error('Something went wrong.')
 }
 
-validateData(process.argv.slice(2))
+if(require.main === module) {
+    console.log(calculateBmi(process.argv[2], process.argv[3]))
+}
 
-const height = parseFloat(process.argv[2])
-const weight = parseFloat(process.argv[3])
-
-console.log(calculateBmi(height, weight))
-
-// npm run calculateBmi 180 74
