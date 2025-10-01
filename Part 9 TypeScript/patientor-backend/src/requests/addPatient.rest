@@ -21,3 +21,43 @@ Content-Type: application/json
     "gender": "male",
     "occupation": "Pirate"
 }
+
+
+###
+
+POST http://localhost:3000/api/patients
+Content-Type: application/json
+
+{
+    "name": "Johnny Depp",
+    "dateOfBirth": "Wrongdate-07-09",
+    "ssn": "123456-123X",
+    "gender": "male",
+    "occupation": "Pirate"
+}
+
+###
+
+POST http://localhost:3000/api/patients
+Content-Type: application/json
+
+{
+    "name": "Johnny Depp",
+    "dateOfBirth": "1972-57-09",
+    "ssn": "123456-123X",
+    "gender": "male",
+    "occupation": "Pirate"
+}
+
+###
+
+POST http://localhost:3000/api/patients
+Content-Type: application/json
+
+{
+    "name": "Johnny Depp",
+    "dateOfBirth": "1972-07-09",
+    "ssn": "123456-123X",
+    "gender": "invalid",
+    "occupation": "Pirate"
+}

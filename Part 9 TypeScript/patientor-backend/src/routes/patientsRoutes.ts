@@ -1,7 +1,8 @@
 import { Router, Response } from "express";
 
 import { NonSensitivePatient } from "../types/types";
-import { addPatientData, getNonSensitiveEntries, getPatientsData, toNewPatient } from "../services/patientsUtils";
+import { addPatientData, getNonSensitiveEntries, getPatientsData, PatientSchema } from "../services/patientsUtils";
+import z from "zod";
 
 const patientsRouter = Router();
 
@@ -11,20 +12,15 @@ patientsRouter.get('/', (_req, res: Response<NonSensitivePatient[]> ) => {
 
 patientsRouter.post('/', (req, res) => {
     try {
-        const newPatientData = toNewPatient(req.body);
+        const newPatientData = PatientSchema.parse(req.body);
         const addedPatient = addPatientData(newPatientData);
         res.status(201).send(addedPatient);
     }
-    catch(error) {
-        if(error instanceof Error) {
-            res.status(401).send({
-                error: error.message
-            });
-        }
-        else {
-            res.status(500).send({
-                error: 'Something is rotten in the state of Denmark.'
-            });
+    catch(error: unknown) {
+        if (error instanceof z.ZodError) {
+            res.status(400).send({ error: error.issues });
+        } else {
+            res.status(400).send({ error: 'unknown error' });
         }
     }
 });
