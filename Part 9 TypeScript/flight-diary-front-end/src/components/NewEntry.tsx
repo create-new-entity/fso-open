@@ -1,6 +1,7 @@
 import { useState } from "react";
 import diaryService from "../services/diaryService";
 import type { DiaryEntry, NewDiaryEntry } from "../types";
+import { AxiosError } from "axios";
 
 type NewEntryProps = {
     setEntries: React.Dispatch<React.SetStateAction<DiaryEntry[]>>
@@ -13,6 +14,7 @@ const NewEntry = (props: NewEntryProps) => {
     const [visibility, setVisibility] = useState('');
     const [weather, setWeather] = useState('');
     const [comment, setComment] = useState('');
+    const [notification, setNotification] = useState('');
 
     const resetForm = () => {
         setDate('');
@@ -23,19 +25,39 @@ const NewEntry = (props: NewEntryProps) => {
 
     const handleSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault();
-        const newEntry = {
-            date, visibility, weather, comment
-        };
-        const addedEntry = await diaryService.createDiaryEntry(newEntry as NewDiaryEntry);
-        setEntries((prev) => {
-            return [...prev, addedEntry];
-        });
-        resetForm();
+        try {
+            const newEntry = {
+                date, visibility, weather, comment
+            };
+            const addedEntry = await diaryService.createDiaryEntry(newEntry as NewDiaryEntry);
+            setEntries((prev) => {
+                return [...prev, addedEntry];
+            });
+            resetForm();
+        }
+        catch(error) {
+            if(error instanceof AxiosError) {
+                setNotification(error.response?.data);
+                setTimeout(() => {
+                    setNotification('');
+                }, 3000);
+            }
+            else {
+                setNotification('Something went wrong.');
+                setTimeout(() => {
+                    setNotification('');
+                }, 3000);
+            }
+        }
     };
 
     return (
         <div>
             <h2>Add new entry</h2>
+            {
+                notification &&
+                <p style={{ color: 'red' }}>{notification}</p>
+            }
             <form onSubmit={handleSubmit}>
                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                     <label>
