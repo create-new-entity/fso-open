@@ -1,5 +1,5 @@
 import { Router, Response } from "express";
-import { Diagnosis } from "../types";
+import { Diagnosis } from "../types/types";
 
 import diagnosesData from "../../data/diagnoses";
 

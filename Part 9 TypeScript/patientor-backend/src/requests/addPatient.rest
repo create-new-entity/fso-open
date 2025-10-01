@@ -1,0 +1,23 @@
+
+POST http://localhost:3000/api/patients
+Content-Type: application/json
+
+{
+    "name": "Johnny Depp",
+    "dateOfBirth": "1986-07-09",
+    "ssn": "123456-123X",
+    "gender": "male",
+    "occupation": "Pirate"
+}
+
+###
+
+POST http://localhost:3000/api/patients
+Content-Type: application/json
+
+{
+    "name": "Johnny Depp",
+    "ssn": "123456-123X",
+    "gender": "male",
+    "occupation": "Pirate"
+}
