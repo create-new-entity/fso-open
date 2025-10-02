@@ -1,7 +1,7 @@
 
 
-type Visibility = 'good' | 'poor';
-type Weather = 'rainy' | 'sunny' | 'windy' | 'cloudy';
+export type Visibility = 'great' | 'good' | 'ok' | 'poor';
+export type Weather = 'rainy' | 'sunny' | 'windy' | 'cloudy' | 'stormy';
 
 export type DiaryEntry = {
     id: string,

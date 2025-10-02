@@ -7,6 +7,7 @@ type NewEntryProps = {
     setEntries: React.Dispatch<React.SetStateAction<DiaryEntry[]>>
 }
 
+
 const NewEntry = (props: NewEntryProps) => {
     const { setEntries } = props;
 
@@ -51,6 +52,18 @@ const NewEntry = (props: NewEntryProps) => {
         }
     };
 
+    const btnsBox = {
+        display: 'flex',
+        justifyContent: 'flex-start',
+        gap: '3px',
+        border: '2px solid',
+        borderRadius: '5px',
+        padding: '3px',
+        alignItems: 'center',
+        marginTop: '5px',
+        marginBottom: '5px'
+    };
+
     return (
         <div>
             <h2>Add new entry</h2>
@@ -61,14 +74,54 @@ const NewEntry = (props: NewEntryProps) => {
             <form onSubmit={handleSubmit}>
                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                     <label>
-                        date: <input value={date} onChange={(e) => setDate(e.target.value)}/>
+                        date: <input
+                                    type="date"
+                                    id="start"
+                                    name="trip-start"
+                                    value={date}
+                                    min="1980-01-01"
+                                    max="2050-12-31"
+                                    onChange={(e) => setDate(e.target.value)}
+                               />
                     </label>
-                    <label>
-                        visibility: <input value={visibility} onChange={(e) => setVisibility(e.target.value)}/>
-                    </label>
-                    <label>
-                        weather: <input value={weather} onChange={(e) => setWeather(e.target.value)}/>
-                    </label>
+                    <div style={btnsBox}>
+                        visibility:
+                        {
+                            ['great', 'good', 'ok', 'poor'].map((v, index) => {
+                                return (
+                                    <label key={index}>
+                                        <input
+                                            type="radio"
+                                            name="visibility"
+                                            value={v}
+                                            checked={v === visibility}
+                                            onChange={(e) => setVisibility(e.target.value)}
+                                        />
+                                        {v}
+                                    </label>
+                                );
+                            })
+                        }
+                    </div>
+                    <div style={btnsBox}>
+                        weather:
+                        {
+                            ['rainy', 'sunny', 'windy', 'cloudy', 'stormy'].map((w, index) => {
+                                return (
+                                    <label key={index}>
+                                        <input
+                                            type="radio"
+                                            name="weather"
+                                            value={w}
+                                            checked={w === weather}
+                                            onChange={(e) => setWeather(e.target.value)}
+                                        />
+                                        {w}
+                                    </label>
+                                );
+                            })
+                        }
+                    </div>
                     <label>
                         comment: <input value={comment} onChange={(e) => setComment(e.target.value)}/>
                     </label>
