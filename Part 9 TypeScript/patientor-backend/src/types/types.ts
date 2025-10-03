@@ -17,7 +17,8 @@ export interface BaseEntry {
   date: string,
   type: EntryTypes,
   specialist: string,
-  description: string
+  description: string,
+  diagnosisCodes? : string[],
 }
 
 type Leave = {
@@ -28,7 +29,6 @@ type Leave = {
 
 interface OccupationalHealthcareEntry extends BaseEntry {
   employerName: string,
-  diagnosisCodes? : string[],
   sickLeave?: Leave
 }
 
@@ -38,7 +38,6 @@ type Discharge = {
 };
 
 interface HospitalEntry extends BaseEntry {
-  diagnosisCodes? : string[],
   discharge: Discharge
 }
 
