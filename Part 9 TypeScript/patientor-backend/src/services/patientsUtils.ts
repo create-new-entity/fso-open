@@ -1,6 +1,6 @@
 
 import patientsData from "../../data/patients";
-import { Gender, NewPatient, NonSensitivePatient, Patient } from "../types/types";
+import { Gender, NewPatient, NonSensitivePatient, Patient, Diagnosis, EntryWithoutId } from "../types/types";
 import z from "zod";
 
 export const getNonSensitiveEntries = (patientsData: Patient[]): NonSensitivePatient[] => {
@@ -19,8 +19,20 @@ export const getPatientsData = (): Patient[] => {
     return patientsData;
 };
 
-export const getPatientData = (patiendId: string) => {
-  const foundPatient = getPatientsData().find((patient) => patient.id === patiendId);
+export const getPatientData = (patientId: string): Patient | undefined => {
+  const foundPatient = getPatientsData().find((patient) => patient.id === patientId);
+  if(!foundPatient) {
+    throw new Error('Person not found.');
+  }
+  return { ...foundPatient };
+};
+
+export const addPatientEntry = (patientId: string, entry: EntryWithoutId): Patient => {
+  const foundPatient = getPatientsData().find((patient) => patient.id === patientId);
+  if(!foundPatient) {
+    throw new Error('Patient not found.');
+  }
+  foundPatient.entries = foundPatient.entries.concat({ ...entry, id: `${foundPatient.entries.length + 1}-${foundPatient.entries.length + 1}`});
   return foundPatient;
 };
 
@@ -38,4 +50,14 @@ export const addPatientData = (newPatientData: NewPatient): Patient => {
     const addedPatient = { ...newPatientData, id: getPatientsData().length + 1 + '' };
     patientsData.push(addedPatient);
     return addedPatient;
+};
+
+
+export const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> =>  {
+  if (!object || typeof object !== 'object' || !('diagnosisCodes' in object)) {
+    // we will just trust the data to be in correct form
+    return [] as Array<Diagnosis['code']>;
+  }
+
+  return object.diagnosisCodes as Array<Diagnosis['code']>;
 };

@@ -1,21 +1,14 @@
-import { Router, Response } from "express";
+import { Router, Request, Response } from "express";
 
-import { NonSensitivePatient, Patient } from "../types/types";
-import { addPatientData, getNonSensitiveEntries, getPatientData, getPatientsData, PatientSchema } from "../services/patientsUtils";
+import { EntryWithoutId, NonSensitivePatient, Patient } from "../types/types";
+import { addPatientData, addPatientEntry, getNonSensitiveEntries, getPatientData, getPatientsData, parseDiagnosisCodes, PatientSchema } from "../services/patientsUtils";
 import z from "zod";
 
 const patientsRouter = Router();
 
-patientsRouter.get('/', (_req, res: Response<NonSensitivePatient[]> ) => {
-    res.send(getNonSensitiveEntries(getPatientsData()));
-});
-
 patientsRouter.get('/:id', (req, res: Response<Patient | { error: string }>) => {
     try {
         const patient = getPatientData(req.params.id);
-        if(!patient) {
-            throw new Error('Person not found.');
-        }
         return res.send(patient);
     }
     catch(error) {
@@ -23,6 +16,31 @@ patientsRouter.get('/:id', (req, res: Response<Patient | { error: string }>) => 
             return res.status(500).send({
                 error: error.message
             });
+        }
+        return res.status(500).send({
+            error: 'Unknown error.'
+        });
+    }
+});
+
+patientsRouter.get('/', (_req, res: Response<NonSensitivePatient[]> ) => {
+    res.send(getNonSensitiveEntries(getPatientsData()));
+});
+
+
+
+patientsRouter.post('/:id/entries', (req: Request<{ id: string}, unknown, EntryWithoutId>, res) => {
+    try {
+        const newEntry = req.body;
+        const diagnosisCodes = parseDiagnosisCodes(req.body);
+        newEntry.diagnosisCodes = diagnosisCodes;
+        const patientId = req.params.id;
+        const updatedPatient = addPatientEntry(patientId, newEntry);
+        return res.send(updatedPatient);
+    }
+    catch(error) {
+        if(error instanceof Error) {
+            return res.status(500).send({ error: error.message });
         }
         return res.status(500).send({
             error: 'Unknown error.'

@@ -1,0 +1,48 @@
+
+POST http://localhost:3000/api/patients/d2773336-f723-11e9-8f0b-362b9e155667/entries
+Content-Type: application/json
+
+{
+    "date": "2019-08-05",
+    "type": "OccupationalHealthcare",
+    "specialist": "MD House",
+    "employerName": "HyPD",
+    "diagnosisCodes": ["Z57.1", "Z74.3", "M51.2"],
+    "description": "Testing post request.",
+    "sickLeave": {
+        "startDate": "2019-08-05",
+        "endDate": "2019-08-28"
+    }
+}
+
+###
+
+
+POST http://localhost:3000/api/patients/d2773336-f723-11e9-8f0b-362b9e155667/entries
+Content-Type: application/json
+
+{
+    "date": "2019-10-20",
+    "specialist": "MD House",
+    "type": "HealthCheck",
+    "description": "Health is better POST request.",
+    "healthCheckRating": 2
+}
+
+###
+
+
+POST http://localhost:3000/api/patients/d2773336-f723-11e9-8f0b-362b9e155667/entries
+Content-Type: application/json
+
+{
+    "date": "2015-01-02",
+    "type": "Hospital",
+    "specialist": "MD House",
+    "diagnosisCodes": ["S62.5"],
+    "description": "Hospital entry from POST request.",
+    "discharge": {
+        "date": "2015-01-16",
+        "criteria": "Thumb has healed."
+    }
+}

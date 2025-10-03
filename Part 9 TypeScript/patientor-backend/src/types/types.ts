@@ -45,7 +45,10 @@ interface HealthCheckEntry extends BaseEntry {
   healthCheckRating: number
 }
 
-type Entry = OccupationalHealthcareEntry | HospitalEntry | HealthCheckEntry;
+export type Entry = OccupationalHealthcareEntry | HospitalEntry | HealthCheckEntry;
+
+type UnionOmit<T, K extends string | number | symbol> = T extends unknown ? Omit<T, K> : never;
+export type EntryWithoutId = UnionOmit<Entry, 'id'>;
 
 export interface Patient {
   id: string;
