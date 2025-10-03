@@ -1,9 +1,9 @@
 
 import patientsData from "../../data/patients";
-import { Gender, NewPatient, Patient } from "../types/types";
+import { Gender, NewPatient, NonSensitivePatient, Patient } from "../types/types";
 import z from "zod";
 
-export const getNonSensitiveEntries = (patientsData: Patient[]): Omit<Patient, 'ssn'>[] => {
+export const getNonSensitiveEntries = (patientsData: Patient[]): NonSensitivePatient[] => {
   return patientsData.map((patient) => {
     return {
         id: patient.id,
@@ -19,12 +19,18 @@ export const getPatientsData = (): Patient[] => {
     return patientsData;
 };
 
+export const getPatientData = (patiendId: string) => {
+  const foundPatient = getPatientsData().find((patient) => patient.id === patiendId);
+  return foundPatient;
+};
+
 export const PatientSchema = z.object({
     name: z.string(),
     ssn: z.string(),
-    gender: z.enum(Gender),
     occupation: z.string(),
-    dateOfBirth: z.iso.date()
+    gender: z.enum(Gender),
+    dateOfBirth: z.iso.date(),
+    entries: z.array(z.any())
 });
 
 export const addPatientData = (newPatientData: NewPatient): Patient => {
