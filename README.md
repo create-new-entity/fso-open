@@ -17,6 +17,7 @@ Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This cou
 - [Part 6 Advanced State Management](#part-6-advanced-state-management-contents)
 - [Part 7 React router, custom hooks, styling app with CSS and webpack](#part-7-react-router-custom-hooks-styling-app-with-css-and-webpack-contents)
 - [Part 8 GraphQL](#part-8-graphql-contents)
+- [Part 9 TypeScript](#part-9-typescript-contents)
 
 ---
 
@@ -408,6 +409,52 @@ All Part 8 exercises commits are [here](https://github.com/create-new-entity/fso
 </ol>
 
 **Keywords: Apollo Client, Apollo Server, Cache Handling, Subscription.**
+
+###### Go back to [Contents](#contents)
+
+---
+
+### Part 9 TypeScript Contents:
+##### [Course Page ↗](https://fullstackopen.com/en/part9)
+
+All Part 9 exercises commits are [here](https://github.com/create-new-entity/fso-open/compare/4b01586%5E...dd48657) and [here](https://github.com/create-new-entity/patientor/compare/20bc28b%5E...9680c94).
+
+<ol>
+    <li>
+        Background and introduction and First steps with TypeScript
+        <ul>
+            <li>
+                Exercises 9.1 - 9.7
+            </li>
+        </ul>
+    </li>
+    <li>
+        Typing an Express app
+        <ul>
+            <li>
+                Exercises 9.8 - 9.14
+            </li>
+        </ul>
+    </li>
+    <li>
+        React with types
+        <ul>
+            <li>
+                Exercises 9.15 - 9.20
+            </li>
+        </ul>
+    </li>
+    <li>
+        Grande finale: Patientor
+        <ul>
+            <li>
+                Exercises 9.21 - 9.30
+            </li>
+        </ul>
+    </li>
+</ol>
+
+**Keywords: Type Narrowing, Type Guards, Type Assertion, Utility Types, Enums, Typing Express App, Typing React App.**
 
 ###### Go back to [Contents](#contents)
 
