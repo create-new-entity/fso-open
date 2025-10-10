@@ -18,6 +18,7 @@ Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This cou
 - [Part 7 React router, custom hooks, styling app with CSS and webpack](#part-7-react-router-custom-hooks-styling-app-with-css-and-webpack-contents)
 - [Part 8 GraphQL](#part-8-graphql-contents)
 - [Part 9 TypeScript](#part-9-typescript-contents)
+- [Part 10 React Native](#part-10-react-native-contents)
 
 ---
 
@@ -460,4 +461,48 @@ All Part 9 exercises commits are [here](https://github.com/create-new-entity/fso
 
 ---
 
+### Part 10 React Native Contents:
+##### [Course Page ↗](https://fullstackopen.com/en/part10)
 
+All Part 10 exercises commits are [here](https://github.com/create-new-entity/fso-open-part10/commits/development/).
+
+<ol>
+    <li>
+        Introduction to React Native
+        <ul>
+            <li>
+                Exercises 10.1 - 10.2
+            </li>
+        </ul>
+    </li>
+    <li>
+        React Native basics
+        <ul>
+            <li>
+                Exercises 10.3 - 10.10
+            </li>
+        </ul>
+    </li>
+    <li>
+        Communicating with server
+        <ul>
+            <li>
+                Exercises 10.11 - 10.16
+            </li>
+        </ul>
+    </li>
+    <li>
+        Testing and extending our application
+        <ul>
+            <li>
+                Exercises 10.17 - 10.27
+            </li>
+        </ul>
+    </li>
+</ol>
+
+**Keywords: Routing, State Management, GraphQL, Testing UI.**
+
+###### Go back to [Contents](#contents)
+
+---
