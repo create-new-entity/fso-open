@@ -19,6 +19,7 @@ Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This cou
 - [Part 8 GraphQL](#part-8-graphql-contents)
 - [Part 9 TypeScript](#part-9-typescript-contents)
 - [Part 10 React Native](#part-10-react-native-contents)
+- [Part 11 CI/CD](#part-11-cicd)
 
 ---
 
@@ -502,6 +503,60 @@ All Part 10 exercises commits are [here](https://github.com/create-new-entity/fs
 </ol>
 
 **Keywords: Routing, State Management, GraphQL, Testing UI.**
+
+###### Go back to [Contents](#contents)
+
+---
+
+### Part 11 CI/CD:
+##### [Course Page ↗](https://fullstackopen.com/en/part11)
+
+All Part 11 exercises commits are [here](https://github.com/create-new-entity/blog-app-fso-open-part11-exercise-11.20/commits/development/).
+
+<ol>
+    <li>
+        Introduction to CI/CD
+        <ul>
+            <li>
+                Exercises 11.1
+            </li>
+        </ul>
+    </li>
+    <li>
+        Getting started with GitHub Actions
+        <ul>
+            <li>
+                Exercises 11.2 - 11.9
+            </li>
+        </ul>
+    </li>
+    <li>
+        Deployment
+        <ul>
+            <li>
+                Exercises 11.10 - 11.12
+            </li>
+        </ul>
+    </li>
+    <li>
+        Keeping green
+        <ul>
+            <li>
+                Exercises 11.13 - 11.17
+            </li>
+        </ul>
+    </li>
+    <li>
+        Expanding Further
+        <ul>
+            <li>
+                Exercises 11.18 - 11.21
+            </li>
+        </ul>
+    </li>
+</ol>
+
+**Keywords: CI/CD, GitHub Actions, Versioning/Tagging, PaaS Deployment.**
 
 ###### Go back to [Contents](#contents)
 
