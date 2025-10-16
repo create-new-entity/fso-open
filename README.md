@@ -1,12 +1,6 @@
 # [Full Stack Open](https://fullstackopen.com/en/)
 ---
 
-Deep Dive Into Modern Web Development.
-
-Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This course will introduce you to modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.
-
----
-
 ### Contents
 - [Part 0 Fundamentals of Web apps](#part-0-fundamentals-of-web-apps-contents)
 - [Part 1 Introduction to React](#part-1-introduction-to-react-contents)
@@ -20,6 +14,7 @@ Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This cou
 - [Part 9 TypeScript](#part-9-typescript-contents)
 - [Part 10 React Native](#part-10-react-native-contents)
 - [Part 11 CI/CD](#part-11-cicd)
+- [Part 12 Containers](#part-12-containers)
 
 ---
 
@@ -557,6 +552,44 @@ All Part 11 exercises commits are [here](https://github.com/create-new-entity/bl
 </ol>
 
 **Keywords: CI/CD, GitHub Actions, Versioning/Tagging, PaaS Deployment.**
+
+###### Go back to [Contents](#contents)
+
+---
+
+### Part 12 Containers:
+##### [Course Page ↗](https://fullstackopen.com/en/part12)
+
+All Part 12 exercises commits are [here](https://github.com/create-new-entity/fso-open-part12-containers-applications/commits/main/).
+
+<ol>
+    <li>
+        Introduction to Containers
+        <ul>
+            <li>
+                Exercises 12.1 - 12.4
+            </li>
+        </ul>
+    </li>
+    <li>
+        Building and configuring environments
+        <ul>
+            <li>
+                Exercises 12.5 - 12.12
+            </li>
+        </ul>
+    </li>
+    <li>
+        Basics of Orchestration
+        <ul>
+            <li>
+                Exercises 12.13 - 12.22
+            </li>
+        </ul>
+    </li>
+</ol>
+
+**Keywords: Docker, Nginx, Docker Compose, Containers and Images.**
 
 ###### Go back to [Contents](#contents)
 
