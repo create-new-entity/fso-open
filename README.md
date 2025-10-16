@@ -1,4 +1,4 @@
-# [Full Stack Open](https://fullstackopen.com/en/)
+# [Full Stack Open ↗](https://fullstackopen.com/en/)
 ---
 
 ### Contents
