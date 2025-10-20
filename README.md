@@ -2,6 +2,7 @@
 ---
 
 ### Contents
+All exercises from all parts are done ✅ ( Signing of on 21st of Oct, 2025 ).
 - [Part 0 Fundamentals of Web apps](#part-0-fundamentals-of-web-apps-contents)
 - [Part 1 Introduction to React](#part-1-introduction-to-react-contents)
 - [Part 2 Communicating with server](#part-2-communicating-with-server-contents)
@@ -15,6 +16,7 @@
 - [Part 10 React Native](#part-10-react-native-contents)
 - [Part 11 CI/CD](#part-11-cicd)
 - [Part 12 Containers](#part-12-containers)
+- [Part 13 Using relational databases](#part-13-using-relational-databases)
 
 ---
 
@@ -590,6 +592,44 @@ All Part 12 exercises commits are [here](https://github.com/create-new-entity/fs
 </ol>
 
 **Keywords: Docker, Nginx, Docker Compose, Containers and Images.**
+
+###### Go back to [Contents](#contents)
+
+---
+
+### Part 13 Using relational databases:
+##### [Course Page ↗](https://fullstackopen.com/en/part13)
+
+All Part 13 exercises commits are [here](https://github.com/create-new-entity/fso-open-part13/commits/development/).
+
+<ol>
+    <li>
+        Using relational databases with Sequelize
+        <ul>
+            <li>
+                Exercises 13.1 - 13.4
+            </li>
+        </ul>
+    </li>
+    <li>
+        Join tables and queries
+        <ul>
+            <li>
+                Exercises 13.5 - 13.16
+            </li>
+        </ul>
+    </li>
+    <li>
+        Migrations, many-to-many relationships
+        <ul>
+            <li>
+                Exercises 13.17 - 13.24
+            </li>
+        </ul>
+    </li>
+</ol>
+
+**Keywords: Relational Databases, ORM, Sequelize, Migrations, One to Many, Many to Many relationships.**
 
 ###### Go back to [Contents](#contents)
 
