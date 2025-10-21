@@ -2,7 +2,7 @@
 ---
 
 ### Contents
-All exercises from all parts are done ✅ ( Signing off on 21st of Oct, 2025 ).
+All exercises from all parts ( total 303 exercises ) are done ✅. Signing off on 21st of Oct, 2025.
 - [Part 0 Fundamentals of Web apps](#part-0-fundamentals-of-web-apps-contents)
 - [Part 1 Introduction to React](#part-1-introduction-to-react-contents)
 - [Part 2 Communicating with server](#part-2-communicating-with-server-contents)
