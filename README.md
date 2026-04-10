@@ -17,7 +17,7 @@ All exercises from all parts ( total 303 exercises ) are done ✅. Signing off o
 - [Part 11 CI/CD](#part-11-cicd)
 - [Part 12 Containers](#part-12-containers)
 - [Part 13 Using relational databases](#part-13-using-relational-databases)
-- [Full Stack Project](https://github.com/create-new-entity/bookden)
+- ✨ [Capstone Full Stack Project](https://github.com/create-new-entity/bookden) ✨
 
 ---
 
